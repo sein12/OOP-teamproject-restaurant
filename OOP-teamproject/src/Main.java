@@ -1,7 +1,8 @@
+//Class for main(Se-in Choi)
 public class Main {
   // Essential Physical Resoruce in the Main!
-  public Table table1 = new Table();
-  public static Preopen pre = new Preopen();
+  public static Table table1 = new Table();
+  public Preopen pre = new Preopen();
 
   public static void main(String[] args) {
     System.out.println("레스토랑 프로젝트");

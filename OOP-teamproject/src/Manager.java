@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Manager extends Server{        // Manager class는 Server class를 상속 받음.
-    public void aboutFeedback(String category, float point, String who) {    // food와 service에 관해서는 같은 메소드 사용
-      if(feedbackGetAndCheck.foodRateMean>=3.7) {
+    public void feedbackMent(String category, float point, String who) {    // food와 service에 관해서는 같은 메소드 사용
+      if(FeedbackPay.foodRateMean>=3.7) {
         System.out.println(category+"에 관한 평가 점수가 "+point+"점으로 매우 좋습니다. 모두 "who"님들께 박수 부탁드립니다.");
       }
-      else if(feedbackGetAndCheck.foodRateMean>=2.5) {
+      else if(FeedbackPay.foodRateMean>=2.5) {
         System.out.println(category+"에 관한 평가 점수가 "+point+"점으로 나쁘지는 않습니다만, "who"님들 조금 더 분발하셔야할 것 같습니다.");
       }
       else {
@@ -13,11 +13,11 @@ public class Manager extends Server{        // Manager class는 Server class를 
 
       }
     }
-    public void aboutFeedback(String category, float point) {    // facility에 관해서는 다른 메소드 사용 (overload)
-      if(feedbackGetAndCheck.foodRateMean>=3.5) {
+    public void feedbackMent(String category, float point) {    // facility에 관해서는 다른 메소드 사용 (overload)
+      if(FeedbackPay.foodRateMean>=3.5) {
         System.out.println(category+"에 관한 평가 점수가 "+point+"점으로 매우 좋습니다. 모두 서로에게 박수 부탁드립니다.");
       }
-      else if(feedbackGetAndCheck.foodRateMean>=1.7) {
+      else if(FeedbackPay.foodRateMean>=1.7) {
         System.out.println(category+"에 관한 평가 점수가 "+point+"점으로 나쁘지는 않습니다만, 서버님들과 쉐프님들께서는 시설의 청결도에 조금 더 신경써주시고 저는 새로운 인테리어를 준비하도록 하겠습니다.");
       }
       else {
@@ -28,11 +28,11 @@ public class Manager extends Server{        // Manager class는 Server class를 
 
     public void manageFeedback() {    // 매니저가 feedback을 확인해서 브리핑하는 메소드
       System.out.println("오늘의 피드백을 확인하겠습니다. 직원 여러분 모두 착석 부탁드립니다.")  // 직원들 있는데서 feedback읽고 브리핑하는 것
-      feedbackGetAndCheck feedback_SingletonInst = feedbackGetAndCheck.getInstance();  // 정우가 feedbackGetAndCheck(싱글톤 클래스) 만들기
-      feedback_SingletonInst.checkFeedback();   // 피드백 확인하는 함수 
-      aboutFeedback("음식", feedbackGetAndCheck.foodRateMean, "쉐프");         // 음식의 feedback점수에 관한 평가
-      aboutFeedback("서비스", feedbackGetAndCheck.serviceRateMean, "서버");    // 서비스의 feedback점수에 관한 평가
-      aboutFeedback("시설", feedbackGetAndCheck.facilityRateMean);            // 시설의 feedback점수에 관한 평가
+      FeedbackPay feedbackPay = FeedbackPay.getInstance();  // feedbackGetAndCheck에서 FeedbackPay로 변경
+        feedbackPay.checkFeedback();   // 피드백 확인하는 함수 
+        feedbackMent("음식", FeedbackPay.foodRateMean, "쉐프");         // 음식의 feedback점수에 관한 평가
+        feedbackMent("서비스", FeedbackPay.serviceRateMean, "서버");    // 서비스의 feedback점수에 관한 평가
+        feedbackMent("시설", FeedbackPay.facilityRateMean);            // 시설의 feedback점수에 관한 평가
     }
 
     public void openTheRestaurant() {    // 매니저가 영업을 시작하는 메소드

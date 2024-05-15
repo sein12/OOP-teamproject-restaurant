@@ -6,7 +6,7 @@ public class Table {
     private boolean isAvailable;
 
     public Table() {
-        orderList = [0,0,0,0,0,0]; // [황태해장국 정식, 순두부 정식, 뚝배기 불고기 정식, 전북 갈비탕, 탄산음료, 술] fixed index
+        orderList = [0,0,0,0,0,0];//[황태해장국 정식, 순두부 정식, 뚝배기 불고기 정식, 전북 갈비탕, 탄산음료, 술] fixed index
         totalPrice = 0;
         isAvailable = true;
     }
@@ -49,25 +49,20 @@ public class Table {
 
     public void updateTotalPrice() {
         totalPrice = 0;
-        for (int i = 0; i < orderList.size(); i++) {
-            if (item.equals("황태해장국 정식")) {
-                totalPrice += StockAndCost.getInstance().getDishPriceInt(item) * orderList[0];
-            } else if (item.equals("순두부 정식")) {
-                totalPrice += StockAndCost.getInstance().getDishPriceInt(item) * orderList[1];
-            } else if (item.equals("뚝배기 불고기 정식")) {
-                totalPrice += StockAndCost.getInstance().getDishPriceInt(item) * orderList[2];
-            } else if (item.equals("전복 갈비탕")) {
-                totalPrice += StockAndCost.getInstance().getDishPriceInt(item) * orderList[3];
-            } else if (item.equals("탄산음료")) {
-                totalPrice += StockAndCost.getInstance().getDrinkPriceInt(item) * orderList[4];
-            } else if (item.equals("술")) {
-                totalPrice += StockAndCost.getInstance().getDrinkPriceInt(item) * orderList[5];
+                totalPrice += StockAndCost.getInstance().getDishPriceInt("황태해장국 정식") * orderList[0];
+                totalPrice += StockAndCost.getInstance().getDishPriceInt("순두부 정식") * orderList[1];
+                totalPrice += StockAndCost.getInstance().getDishPriceInt("뚝배기 불고기 정식") * orderList[2];
+                totalPrice += StockAndCost.getInstance().getDishPriceInt("전복 갈비탕") * orderList[3];
+                totalPrice += StockAndCost.getInstance().getDrinkPriceInt("탄산음료") * orderList[4];
+                totalPrice += StockAndCost.getInstance().getDrinkPriceInt("술") * orderList[5];
             }
         }
     }
 
-    public void resetTotalPrice() {
+    public void reset() { //결제가 완료된 후 table 초기화
         totalPrice = 0;
+        orderList = [0,0,0,0,0,0];
+        
     }
 
     public int getTotalPrice() {
@@ -104,7 +99,7 @@ public class Table {
     //-------------
 
     private boolean isSeatOccupiedRandom() {
-        // 랜덤한 참/거짓 값을 생성하여 자리가 차있는지 여부확인
+        // 랜덤한 참/거짓 값을 생성하여 시간에 따른 자리 차있는지 여부 확인
         Random random = new Random();
         randomValue = random.nextBoolean();
         isAvailable = randomValue;
@@ -112,6 +107,11 @@ public class Table {
         
         
         return random.nextBoolean();
+    }
+
+    private void seatOccupied(Boolean x){ //seat available 여부를 table field와 hall의 spatial list인 seatList에 수동 업데이트(예은/정우-예약에 따른 자리 업데이트, 손님 방문에 따른 자리 업데이트에 사용)
+        isAvailable = x;
+        Hall.getInstance().updateSeat(0, x);
     }
 
     public void seatProtocol() {

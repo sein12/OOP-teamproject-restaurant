@@ -1,6 +1,6 @@
-import java.util.Scanner;
-
-public class Preopen {  
+public class Preopen {
+  public static Preopen instance;
+  
   Chef chef = new Chef();
   Manager manager = new Manager();
   Server server = new Server();

@@ -1,3 +1,5 @@
+package pay;
+
 public class CardPay implements Pay {
 
     private double cardBalance; // 고객 카드값

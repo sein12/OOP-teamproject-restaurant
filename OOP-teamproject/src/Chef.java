@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Chef {
   StockAndCost stockAndCost_singletonInst = StockAndCost.getInstance();
+  stockAndCost_singletonInst.
 
   // 요리 재고 확인 메소드
 

@@ -19,7 +19,7 @@ public class CashPay implements Pay {
     // 오버라이드
     public void pay(double price) {
           System.out.println("결제하시겠습니까?");
-          if (cashBalance >= price && ) {
+          if (cashBalance >= price) {
               boolean hasCoupon = checker.askCoupon();
               if (hasCoupon) {
                       checker.applyDiscount(price, hasCoupon);
