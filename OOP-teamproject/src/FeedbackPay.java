@@ -2,6 +2,9 @@ import java.util.Scanner;
 
 public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
     static int rateNum = 0;            // 평가 횟수; 평가한 사람의 수
+    static int foodRateSum = 0;
+    static int serviceRateSum = 0;       // 평가 받는 항목 점수 총합
+    facilityRateSum
     static float foodRateSum = 0;        // 음식 점수 총합
     static float serviceRateSum = 0;     // 서비스 점수 총합
     static float facilityRateSum = 0;    // 시설 점수 총합
@@ -24,6 +27,7 @@ public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
         Scanner scanner = new Scanner(System.in);
         String feedbackok = scanner.next();
         if (feedbackok.equals("예")) {
+            rateNum += 1;        // 피드백 남긴 사람 수
             System.out.println("음식, 서비스, 시설 이 세가지 항목에 대해 고객님의 점수를 남겨주세요.");
             System.out.println("저희 매장의 음식에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ");
             foodRateSum += scanner.nextFloat();
@@ -39,7 +43,8 @@ public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
         }
     }
 
-    // (정우)피드백 확인 메소드 이름은 FeedbackPay()로 해줘
+    // (정우)피드백 확인 메소드 이름은 makeFeedbackSum()로 해주세요
+    // 아래 메소드들 수정 부탁드려요
     public String FeedbackPay() {
         return freefeedback;
     }
