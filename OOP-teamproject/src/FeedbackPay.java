@@ -2,12 +2,16 @@ import java.util.Scanner;
 
 public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
     static int rateNum = 0;            // 평가 횟수; 평가한 사람의 수
-    static int foodRateSum = 0;
-    static int serviceRateSum = 0;       // 평가 받는 항목 점수 총합
-    facilityRateSum
+    
     static float foodRateSum = 0;        // 음식 점수 총합
     static float serviceRateSum = 0;     // 서비스 점수 총합
     static float facilityRateSum = 0;    // 시설 점수 총합
+
+    static float foodRateMean = 0;        // 
+    static float serviceRateMean = 0;     // 
+    static float facilityRateMean = 0;    // (정우) makeFeedbackSum()에서 사용할 변수 평가항목 평균값 변수
+
+    
 
     private static FeedbackPay instance;
 
