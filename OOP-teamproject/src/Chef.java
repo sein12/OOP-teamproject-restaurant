@@ -34,7 +34,7 @@ public class Chef {
           for (int i = 0; i < DishMenu.length; i++) {
               System.out.println("현재 "+DishMenu[i]+"의 재고는 "+DishStock[i]+"개 남아있습니다. "+DishMenu[i]+"재고를 몇개 추가할까요?");    
               count = scanner.nextInt();    // DishMenu[i]의 재고를 count만큼 추가
-                  RevenueAndCost.stockCost += count*DishCost[i];    // update한 재고 개수의 가격만큼 지출에 update
+                  FinanceCal.expenses += count*DishCost[i];    // update한 재고 개수의 가격만큼 지출에 update
                 DishStock[i] += count;    // update한 재고 개수만큼 재고에 update
               System.out.println(DishMenu[i]+"의 재고가 성공적으로 추가되었습니다. 현재"+DishMenu[i]+"의 재고는 "+DishStock[i]+"개 남아있습니다.");    
           }
@@ -75,7 +75,7 @@ public class Chef {
           for (int i = 0; i < drinkMenu.length; i++) {
               System.out.println("현재 "+drinkMenu[i]+"의 재고는 "+drinkStock[i]+"개 남아있습니다. "+drinkMenu[i]+"재고를 몇개 추가할까요?");    
               count = scanner.nextInt();    // drinkMenu[i]의 재고를 count만큼 추가
-                RevenueAndCost.stockCost += count*drinkCost[i];    // update한 재고 개수의 가격만큼 지출에 update
+                FinanceCal.expenses += count*drinkCost[i];    // update한 재고 개수의 가격만큼 지출에 update
               drinkStock[i] += count;    // update한 재고 개수만큼 재고에 update
               System.out.println(drinkMenu[i]+"의 재고가 성공적으로 추가되었습니다. 현재"+drinkMenu[i]+"의 재고는 "+drinkStock[i]+"개 남아있습니다.");    
           }    // for문 
