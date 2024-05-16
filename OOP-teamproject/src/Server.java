@@ -1,24 +1,24 @@
 import java.util.Scanner;
 
 public class Server {
-    MenuCustomerPrice menu_and_price = MenuCustomerPrice.getInstance();
-    StockAndCost stock_and_cost = StockAndCost.getInstance();
+    MenuCustomerPrice menuCustomerPrice = MenuCustomerPrice.getInstance();
+    StockAndCost stockAndCost = StockAndCost.getInstance();
+    ReservationSystem reservationSystem = ReservationSystem.getInstance();    // reservationsEntry 메서드에서 사용
+    CashPay cashPay = CashPay.getInstance(); // FeedbackPayied 메서드에서 사용
+    CardPay cardPay = CardPay.getInstance(); // FeedbackPayied 메서드에서 사용
+
+
     Scanner scanner = new Scanner(System.in);
     private int adults;
     private int children;
 
-    void welcome() { // 인사 메소드; 인삿말만 출력
+    void welcome() { // 인사 메소드
         System.out.println("안녕하세요. 식당에 오신 것을 환영합니다.");
     }
 
-    void reservationsEntry() { // 예약 입장/불가 메소드
-        // DB에서 해당 타임 값 변수 만들면 가져오기
-        System.out.println("이번 " + Table.currentTime + "시 타임에 대해 예약 확인해 드리겠습니다."); // 재윤이가 Table class에 static으로
-                                                                                   // currentTime변수 만들어주기. Server에서는
-                                                                                   // Table.currentTime으로 받아와서 쓸거임.
-
-        if (Hall.reservationList[Table.currentTime - 12]) { // 재윤or정우가 Hall class에 reservationList[] static으로 만들어주기 boll
-                                                            // type list입니다.
+    void reservationsEntry(int restaurantHours) { // 예약 입장 여부 메소드; (세인)메인에서 시각 매개변수로 넣어서 쓰세요.
+        System.out.println("이번 " + restaurantHours + "시 타임에 대해 예약 확인해 드리겠습니다.") // Table.currentTime으로 받아와서 쓸거임.                                                                            
+        if (reservationSystem.reservationtime[restaurantHours - 12]) { // ReservationSystem class의 reservationtime list
             System.out.println("이번 타임에 대해 예약 확인 되었습니다. 바로 입장 도와드리겠습니다.");
             countAdultsAndChildren();
         } else {
@@ -27,10 +27,9 @@ public class Server {
         }
     }
 
-    void onTheSpotEntry() { // 현장 입장 확인 메소드
-        System.out.println("이번 " + Table.currentTime + "시 타임에 대해 현장 입장 가능한지 확인해드리겠습니다.");
-        if (Table.isOccupied) { // 현재 정우의 ReservationSystem.java에 있는 변수입니다. 재윤이의 Table class안에 static으로 옮겨주세요
-            // isOccupied == true면; 자리 꽉 참. 이용 불가
+    void onTheSpotEntry(int restaurantHours) { // 현장 입장 확인 메소드; (세인)메인에서 시각 매개변수로 넣어서 쓰세요.
+        System.out.println("이번 " + restaurantHours + "시 타임에 대해 현장 입장 가능한지 확인해드리겠습니다.");
+        if (Table.isOccupied) { // isOccupied == true면; 자리 꽉 참. 이용 불가
             System.out.println("죄송합니다. 남아있는 자리가 없으므로 현재 타임에는 식당 이용이 불가합니다. 다른 타임에 다시 방문하거나 다른 날짜에 대해 예약 후 방문해주세요.");
         } else { // isOccupied == false면; 꽉 안참. 자리 안내
             System.out.println("현재 남아있는 좌석이 있습니다. 입장 도와드리겠습니다.");
@@ -169,12 +168,10 @@ public class Server {
         Scanner scannere = new Scanner(System.in);
         String payMethod = scanner.nextLine();
         if (payMethod.equals("card")) {        // 카드로 결제한다고 하면
-            CardPay cardPay = CardPay.getInstance(); // (정우) CardPay 싱글톤으로 만들기 전임.
-            cardPay.pay(price);                   // 위에서 넣은 변수가 여기서 매개변수로 쓰임.
+            cardPay.pay(price);                // 위에서 넣은 변수가 여기서 매개변수로 쓰임.
         }
         else if (payMethod.equals("cash")) {   // 현금으로 결제한다고 하면
-            CashPay cashPay = CashPay.getInstance();// (정우) CashPay 싱글톤으로 만들기 전임.
-            cashPay.pay(price);
+            cashPay.pay(price);                // 위에서 넣은 변수가 여기서 매개변수로 쓰임.
         }
                                                                                                  // 둘의 인스턴스 생성
         
