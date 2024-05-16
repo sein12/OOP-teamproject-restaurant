@@ -53,8 +53,7 @@ public class Server {
             System.out.println(MenuCustomerPrice.coursePriceInt[i]); // 다음 요리명과 가격을출력하기 위해 개행
         }
         System.out.println("**********음료**********");
-        for (int j = 0; j < MenuCustomerPrice.drinkMenu.size(); j++) { // drink_menu의 index값 개수만큼 메뉴와 가격을 나란히 차례로
-                                                                             // 출력하기를 반복
+        for (int j = 0; j < MenuCustomerPrice.drinkMenu.size(); j++) { // drinkMenu index값 개수만큼 메뉴와 가격을 나란히 출력을 반복
             System.out.print(MenuCustomerPrice.drinkMenu[j] + "    "); // 음료명과 가격을 나란히 출력할 수 있도록 print하고 enter안함.
             System.out.println(MenuCustomerPrice.drinkPriceInt[j]); // 다음 요리명과 가격을출력하기 위해 개행
         }
