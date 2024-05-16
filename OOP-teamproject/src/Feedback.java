@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
+public class Feedback {        //  getFeedbackAndGetPayied에서 FeedbackPay
     static int rateNum = 0;            // 평가 횟수; 평가한 사람의 수
     
     static float foodRateSum = 0;        // 음식 점수 총합
@@ -13,14 +13,14 @@ public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
 
     
 
-    private static FeedbackPay instance;
+    private static Feedback instance;
 
-    private FeedbackPay() {
+    private Feedback() {
     }
 
-    public static FeedbackPay getInstance() {
+    public static Feedback getInstance() {
         if (instance == null) {
-            instance = new FeedbackPay();
+            instance = new Feedback();
         }
         return instance;
     }
@@ -47,31 +47,10 @@ public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
         }
     }
 
-    // (정우)피드백 확인 메소드 이름은 makeFeedbackSum()로 해주세요
-     public void getFeedback() {
-        System.out.println("고객님요
-    public String FeedbackPay() {
-        return freefeedback;
-    }
-    public double getFoodRate() {
-        if (rateNum == 0) {
-            return 0;
-        }
-        return foodRateSum / rateNum;
-    }
+    public void setFeedback() {    // 피드백 확인 준비하는 메소드(분야별 평균값 내는 메소드)
+    foodRateMean = foodRateSum / rateNum;
 
-    public double getServiceRate() {
-        if (rateNum == 0) {
-            return 0;
-        }
-        return serviceRateSum / rateNum;
-    }
+    serviceRateMean = serviceRateSum / rateNum;
 
-    public double getFacilityRate(){
-        if (rateNum == 0) {
-            return 0;
-        }
-        return facilityRateSum / rateNum;
+    facilityRateMean = facilityRateSum / rateNum;
     }
-    **/
-}
