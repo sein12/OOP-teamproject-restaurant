@@ -88,8 +88,6 @@ public class Server {
         }
     }
 
-    }
-
     void orderManager() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("주문을 도와드리겠습니다.");
@@ -163,18 +161,22 @@ public class Server {
         scanner.close();
     }
 
-    void serverFeedbackPayied() { // 피드백 받고 결제 받는 메소드; 내가 보내준 코드 정우가 payment.java에 수정해 넣기
-        FeedbackPay feedbackPay = FeedbackPay.getInstance(); // 정우가 feedback에 관련된(받고 확인하는 메소드 있는) class 싱글톤으로 만들기
-        feedbackPay.getFeedback(); // 결제하기 전 피드백 받는 함수 호출
-
-        Payment payment = new Payment(); // 외부 클래스의 인스턴스 생성
-        Payment.CouponandDiscount couponandDiscount_inst = payment_inst.new CouponandDiscount(); // 비정적 중첩 클래스;Payment
-                                                                                                 // 내부의 CouponChecker 이
+    void FeedbackPayied(double price) { // 결제 메소드 (세인) 여기 매개 변수 넣어주세요; 테이블마다의 가격
+        System.out.println("결제에 앞서 피드백을 받고 있습니다. 익명성이 보장되며 자유롭게 참여하실 수 있습니다.");    // 결제메소드에서 피드백 받음
+        Feedback feedback = Feedback.getInstance(); // (정우) Feedback 싱글톤으로 만들기 전임. 
+        feedback.getFeedback(); // 결제하기 전 피드백 받기
+        System.out.println("결제를 원하시는 수단을 입력해주세요(card/cash): ");
+        Scanner scannere = new Scanner(System.in)
+        String payMethod = scanner.nextLine();
+        if (payMethod.equals("card")) {        // 카드로 결제한다고 하면
+            CardPay cardPay = CardPay.getInstance(); // (정우) CardPay 싱글톤으로 만들기 전임.
+            cardPay.pay(price)                            // 위에서 넣은 변수가 여기서 매개변수로 쓰임.
+        }
+        else if (payMethod.equals("cash")) {   // 현금으로 결제한다고 하면
+            CashPay cashPay = CashPay.getInstance();// (정우) CashPay 싱글톤으로 만들기 전임.
+            cashPay.pay(price)
+        }
                                                                                                  // 둘의 인스턴스 생성
-        System.out.println("결제 도와드리겠습니다.");
-        couponandDiscount_inst.checkCouponAndDiscount(); // 쿠폰 확인 후 할인 적용하는 메소드
-        Payment.payWithCardCash payWithCardCash_inst = payment_inst.new payWithCardCash(); // 비정적 중첩 클래스;Payment 내부의
-                                                                                           // CouponChecker 이 둘의 인스턴스 생성
-        payWithCardCash_inst.payWithCardAndCash();
+        
     }
 } // Server Class 닫힘
