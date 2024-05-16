@@ -1,6 +1,14 @@
 import java.util.Scanner;
 
 public class Feedback {        //  getFeedbackAndGetPayied에서 FeedbackPay
+    private static Feedback instance;
+    public static synchronized Feedback getInstance() {
+    	
+		if (instance == null) {
+            instance = new Feedback();
+        }
+        return instance;
+    }
     static int rateNum = 0;            // 평가 횟수; 평가한 사람의 수
     
     static float foodRateSum = 0;        // 음식 점수 총합
