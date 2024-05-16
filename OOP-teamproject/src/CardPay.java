@@ -1,6 +1,14 @@
 package pay;
 
 public class CardPay implements Pay {
+    private static CardPay instance;
+    public static synchronized CardPay getInstance() {
+    	
+		if (instance == null) {
+            instance = new CardPay();
+        }
+        return instance;
+    }
 
     private double cardBalance; // 고객 카드값
 
