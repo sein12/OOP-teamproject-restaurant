@@ -48,18 +48,18 @@ public class Server {
 
     void menuGuidance() { // 모든 메뉴 안내 메소드; 가격도 포함
         System.out.println("**********요리**********");
-        for (int i = 0; i < menu_and_price.getCourseMenuList().length; i++) { // course_menu의 index값 개수만큼 메뉴와 가격을 나란히
+        for (int i = 0; i < MenuCustomerPrice.getCourseMenuList().length; i++) { // course_menu의 index값 개수만큼 메뉴와 가격을 나란히
                                                                               // 차례로 출력하기를 반복
-            System.out.print(menu_and_price.getCourseMenuList()[i] + "    "); // 요리명과 가격을 나란히 출력할 수 있도록 print하고 enter안함.
-            System.out.println(menu_and_price.getCoursePrice(menu_and_price.getCourseMenuList()[i])); // 다음 요리명과 가격을
+            System.out.print(MenuCustomerPrice.getCourseMenuList()[i] + "    "); // 요리명과 가격을 나란히 출력할 수 있도록 print하고 enter안함.
+            System.out.println(MenuCustomerPrice.getCoursePrice(MenuCustomerPrice.getCourseMenuList()[i])); // 다음 요리명과 가격을
                                                                                                       // 출력하기 위해 다음 줄로
                                                                                                       // 개행
         }
         System.out.println("**********음료**********");
-        for (int j = 0; j < menu_and_price.getDrinkMenuList().length; j++) { // drink_menu의 index값 개수만큼 메뉴와 가격을 나란히 차례로
+        for (int j = 0; j < MenuCustomerPrice.getDrinkMenuList().length; j++) { // drink_menu의 index값 개수만큼 메뉴와 가격을 나란히 차례로
                                                                              // 출력하기를 반복
-            System.out.print(menu_and_price.getDrinkMenuList()[j] + "    "); // 음료명과 가격을 나란히 출력할 수 있도록 print하고 enter안함.
-            System.out.println(menu_and_price.getDrinkPrice(menu_and_price.getDrinkMenuList()[j])); // 다음 음료명과 가격을 출력하기
+            System.out.print(MenuCustomerPrice.getDrinkMenuList()[j] + "    "); // 음료명과 가격을 나란히 출력할 수 있도록 print하고 enter안함.
+            System.out.println(MenuCustomerPrice.getDrinkPrice(MenuCustomerPrice.getDrinkMenuList()[j])); // 다음 음료명과 가격을 출력하기
                                                                                                     // 위해 다음 줄로 개행
         }
     }
