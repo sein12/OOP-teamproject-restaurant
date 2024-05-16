@@ -4,7 +4,7 @@ public class Chef {
   // 요리 재고 확인 메소드
 
   public int getDishStock() {
-      System.out.println("요리 별 재고 확인하겠습니다")
+      System.out.println("요리 별 재고 확인하겠습니다");
       for (int i = 0; i < StockAndCost.DishMenu.length; i++) {
           System.out.println(StockAndCost.DishMenu[i]+"의 재고는 "+StockAndCost.DishStock[i]+"개 남아있습니다");    // for문으로 메뉴별 재고 출력
       }
@@ -12,7 +12,7 @@ public class Chef {
 
   // 음료 재고 확인 메소드
   public int getDrinkStock() {
-      System.out.println("음료 별 재고 확인하겠습니다")
+      System.out.println("음료 별 재고 확인하겠습니다");
       for (int i = 0; i < StockAndCost.drinkMenu.length; i++) {
           System.out.println(StockAndCost.drinkMenu[i]+"의 재고는 "+StockAndCost.drinkStock[i]+"개 남아있습니다");    // for문으로 메뉴별 재고 출력
       }

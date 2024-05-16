@@ -166,15 +166,15 @@ public class Server {
         Feedback feedback = Feedback.getInstance(); // (정우) Feedback 싱글톤으로 만들기 전임. 
         feedback.getFeedback(); // 결제하기 전 피드백 받기
         System.out.println("결제를 원하시는 수단을 입력해주세요(card/cash): ");
-        Scanner scannere = new Scanner(System.in)
+        Scanner scannere = new Scanner(System.in);
         String payMethod = scanner.nextLine();
         if (payMethod.equals("card")) {        // 카드로 결제한다고 하면
             CardPay cardPay = CardPay.getInstance(); // (정우) CardPay 싱글톤으로 만들기 전임.
-            cardPay.pay(price)                            // 위에서 넣은 변수가 여기서 매개변수로 쓰임.
+            cardPay.pay(price);                   // 위에서 넣은 변수가 여기서 매개변수로 쓰임.
         }
         else if (payMethod.equals("cash")) {   // 현금으로 결제한다고 하면
             CashPay cashPay = CashPay.getInstance();// (정우) CashPay 싱글톤으로 만들기 전임.
-            cashPay.pay(price)
+            cashPay.pay(price);
         }
                                                                                                  // 둘의 인스턴스 생성
         

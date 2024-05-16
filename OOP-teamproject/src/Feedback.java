@@ -47,10 +47,11 @@ public class Feedback {        //  getFeedbackAndGetPayied에서 FeedbackPay
         }
     }
 
-    public void setFeedback() {    // 피드백 확인 준비하는 메소드(분야별 평균값 내는 메소드)
-    foodRateMean = foodRateSum / rateNum;
-
-    serviceRateMean = serviceRateSum / rateNum;
-
-    facilityRateMean = facilityRateSum / rateNum;
+	    public void setFeedback() {    // 피드백 확인 준비하는 메소드(분야별 평균값 내는 메소드)
+		    foodRateMean = foodRateSum / rateNum;
+		
+		    serviceRateMean = serviceRateSum / rateNum;
+		
+		    facilityRateMean = facilityRateSum / rateNum;
+	    }
     }

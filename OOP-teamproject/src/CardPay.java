@@ -1,5 +1,3 @@
-package pay;
-
 public class CardPay implements Pay {
     private static CardPay instance;
     public static synchronized CardPay getInstance() {

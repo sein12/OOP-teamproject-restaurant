@@ -6,7 +6,7 @@ public class Table {
     private boolean isAvailable;
 
     public Table() {
-        orderList = [0,0,0,0,0,0];//[황태해장국 정식, 순두부 정식, 뚝배기 불고기 정식, 전북 갈비탕, 탄산음료, 술] fixed index
+        orderList = [0,0,0,0,0,0]; //[황태해장국 정식, 순두부 정식, 뚝배기 불고기 정식, 전북 갈비탕, 탄산음료, 술] fixed index
         totalPrice = 0;
         isAvailable = true;
     }
@@ -56,8 +56,8 @@ public class Table {
                 totalPrice += StockAndCost.getInstance().getDrinkPriceInt("탄산음료") * orderList[4];
                 totalPrice += StockAndCost.getInstance().getDrinkPriceInt("술") * orderList[5];
             }
-        }
-    }
+        
+    
 
     public void reset() { //결제가 완료된 후 table 초기화
         totalPrice = 0;
@@ -129,4 +129,3 @@ public class Table {
     //     isAvailable = available;
     }
     
-}
