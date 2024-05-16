@@ -48,7 +48,8 @@ public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
     }
 
     // (정우)피드백 확인 메소드 이름은 makeFeedbackSum()로 해주세요
-    // 아래 메소드들 수정 부탁드려요
+     public void getFeedback() {
+        System.out.println("고객님요
     public String FeedbackPay() {
         return freefeedback;
     }
@@ -72,4 +73,5 @@ public class FeedbackPay {        //  getFeedbackAndGetPayied에서 FeedbackPay
         }
         return facilityRateSum / rateNum;
     }
+    **/
 }
