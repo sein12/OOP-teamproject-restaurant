@@ -1,4 +1,12 @@
 public class CashPay implements Pay {
+    private static CashPay instance;
+    public static synchronized CashPay getInstance() {
+    	
+		if (instance == null) {
+            instance = new CashPay();
+        }
+        return instance;
+    }
     private double cashBalance; // 고객 현금 값
 
     public void setCashBalance(double cashBalance) {
