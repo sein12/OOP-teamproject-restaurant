@@ -28,6 +28,7 @@ public class CardPay implements Pay {
             if (hasCoupon) {
                 checker.applyDiscount(price, hasCoupon);
             }
+	    Sales.Sales += price;
             cardBalance -= price;
             System.out.println("카드로 결제가 완료되었습니다.");
         } else {
