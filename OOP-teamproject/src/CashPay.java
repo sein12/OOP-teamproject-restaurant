@@ -32,7 +32,8 @@ public class CashPay implements Pay {
               if (hasCoupon) {
                       checker.applyDiscount(price, hasCoupon);
               }
-              cashBalance -= price;
+              cashBalance -= price;	
+	      Sales.Sales += price;
               System.out.println("현금으로 결제가 완료되었습니다.");
               calculateChange(cashBalance, price);
           } else {
