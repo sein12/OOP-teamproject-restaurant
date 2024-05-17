@@ -30,9 +30,9 @@ public class Server {
 
     void onTheSpotEntry(int restaurantHours) { // 현장 입장 확인 메소드; (세인)메인에서 시각 매개변수로 넣어서 쓰세요.
         System.out.println("이번 " + restaurantHours + "시 타임에 대해 현장 입장 가능한지 확인해드리겠습니다.");
-        if (Table.isOccupied) { // static인 isOccupied == true면; 자리 꽉 참. 이용 불가
+        if (Table.isOccupied) { // (세인) if문 돌아가기 전에 Table에서 isOccupied에 bool값 할당 위해 Table의 함수 호출 필요
             System.out.println("죄송합니다. 남아있는 자리가 없으므로 현재 타임에는 식당 이용이 불가합니다. 다른 타임에 다시 방문하거나 다른 날짜에 대해 예약 후 방문해주세요.");
-        } else { // isOccupied == false면; 꽉 안참. 자리 안내
+        } else { // isOccupied == false면; 꽉 안참. 자리 안
             System.out.println("현재 남아있는 좌석이 있습니다. 입장 도와드리겠습니다.");
             countAdultsAndChildren();
         }
