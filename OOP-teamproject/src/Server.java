@@ -161,7 +161,7 @@ public class Server {
         Feedback feedback = Feedback.getInstance(); // Feedback 싱글톤
         feedback.getFeedback(); // 결제하기 전 피드백 받기
         System.out.println("결제를 원하시는 수단을 입력해주세요(card/cash): ");
-        Scanner scannere = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);    // 여기서 scanner열고 
         String payMethod = scanner.nextLine();
         if (payMethod.equals("card")) {        // 카드로 결제한다고 하면
             cardPay.pay(price);                // 위에서 넣은 변수가 여기서 매개변수로 쓰임. 위에서 CardPay 싱글톤 객체 선언함.
@@ -169,5 +169,6 @@ public class Server {
         else if (payMethod.equals("cash")) {   // 현금으로 결제한다고 하면
             cashPay.pay(price);                // 위에서 넣은 변수가 여기서 매개변수로 쓰임. 위에서 CashPay 싱글톤 객체 선언함.
         }
+        scanner.close();                            // 여기서 scanner 닫기
     }
 } // Server Class 닫힘
