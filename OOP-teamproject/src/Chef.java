@@ -1,11 +1,12 @@
 import java.util.Scanner;
+import java.util.List;
 
 public class Chef {
   // 요리 재고 확인 메소드
 
   public int getDishStock() {
       System.out.println("요리 별 재고 확인하겠습니다");
-      for (int i = 0; i < StockAndCost.DishMenu.length; i++) {
+      for (int i = 0; i < StockAndCost.DishMenu.size(); i++) {
           System.out.println(StockAndCost.DishMenu[i]+"의 재고는 "+StockAndCost.DishStock[i]+"개 남아있습니다");    // for문으로 메뉴별 재고 출력
       }
   }
@@ -13,7 +14,7 @@ public class Chef {
   // 음료 재고 확인 메소드
   public int getDrinkStock() {
       System.out.println("음료 별 재고 확인하겠습니다");
-      for (int i = 0; i < StockAndCost.drinkMenu.length; i++) {
+      for (int i = 0; i < StockAndCost.drinkMenu.size(); i++) {
           System.out.println(StockAndCost.drinkMenu[i]+"의 재고는 "+StockAndCost.drinkStock[i]+"개 남아있습니다");    // for문으로 메뉴별 재고 출력
       }
   }
@@ -28,7 +29,7 @@ public class Chef {
 
       if (answer.equals("추가")){
           System.out.println("요리의 재고를 추가하겠습니다.");
-          for (int i = 0; i < StockAndCost.DishMenu.length; i++) {
+          for (int i = 0; i < StockAndCost.DishMenu.size(); i++) {
               System.out.println("현재 "+StockAndCost.DishMenu[i]+"의 재고는 "+StockAndCost.DishStock[i]+"개 남아있습니다. "+ StockAndCost.DishMenu[i]+"재고를 몇개 추가할까요?");    
               count = scanner.nextInt();    // StockAndCost.DishMenu[i]의 재고를 count만큼 추가
               FinanceCal.expenses += count*StockAndCost.DishCost[i];    // update한 재고 개수의 가격만큼 지출에 update
@@ -38,7 +39,7 @@ public class Chef {
       }
       else if(answer.equals("감소")) {
           System.out.println("요리의 재고를 감소시키겠습니다.");
-          for (int i = 0; i < StockAndCost.DishMenu.length; i++) {
+          for (int i = 0; i < StockAndCost.DishMenu.size(); i++) {
               countUnchanged = true;
               while(countUnchanged){    // 값이 바뀌지 않았으면 무한 반복
                   System.out.println("현재 "+StockAndCost.DishMenu[i]+"의 재고는 "+StockAndCost.DishStock[i]+"개 남아있습니다. "+StockAndCost.DishMenu[i]+"재고를 몇개 감소시킬까요?");    
@@ -68,7 +69,7 @@ public class Chef {
 
       if (answer.equals("추가")){
           System.out.println("음료의 재고를 추가하겠습니다.");
-          for (int i = 0; i < StockAndCost.drinkMenu.length; i++) {
+          for (int i = 0; i < StockAndCost.drinkMenu.size(); i++) {
               System.out.println("현재 "+StockAndCost.drinkMenu[i]+"의 재고는 "+StockAndCost.drinkStock[i]+"개 남아있습니다. "+StockAndCost.drinkMenu[i]+"재고를 몇개 추가할까요?");    
               count = scanner.nextInt();    // StockAndCost.drinkMenu[i]의 재고를 count만큼 추가
               FinanceCal.expenses += count*StockAndCost.drinkCost[i];    // update한 재고 개수의 가격만큼 지출에 update
@@ -78,7 +79,7 @@ public class Chef {
       }    // if
       else if(answer.equals("감소")) {
           System.out.println("음료의 재고를 감소시키겠습니다.");
-          for (int i = 0; i < StockAndCost.drinkMenu.length; i++) {
+          for (int i = 0; i < StockAndCost.drinkMenu.size(); i++) {
               countUnchanged = true;
               while(countUnchanged){    // 값이 바뀌지 않았으면 무한 반복
                   System.out.println("현재 "+StockAndCost.drinkMenu[i]+"의 재고는 "+StockAndCost.drinkStock[i]+"개 남아있습니다. "+StockAndCost.drinkMenu[i]+"재고를 몇개 감소시킬까요?");    
