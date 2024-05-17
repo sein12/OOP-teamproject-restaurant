@@ -1,5 +1,5 @@
 public class RevenueAndCost {
-    static int revenue; // 수입(결제 후 수입 업데이트, 정우)
+    static int revenue = Sales.Sales; // 수입(결제 후 수입 업데이트, 정우)
     static int expenses; // 지출(재고 추가 과정에서 지출 업데이트, 예은)
 
     public static int calculateNetProfit() { 
