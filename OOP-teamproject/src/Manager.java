@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Manager extends Server{        // Manager class는 Server class를 상속 받음.
+    Feedback feedback = Feedback.getInstance();  // manageFeedback() 사용; feedbackGetAndCheck에서 Feedback으로 변경
     public void feedbackMent(String category, float point, String who) {    // food와 service에 관해서는 같은 메소드 사용
       if(Feedback.foodRateMean>=3.7) {
         System.out.println(category+"에 관한 평가 점수가 "+point+"점으로 매우 좋습니다. 모두 "who"님들께 박수 부탁드립니다.");
@@ -28,18 +29,17 @@ public class Manager extends Server{        // Manager class는 Server class를 
 
     public void manageFeedback() {    // 매니저가 feedback을 확인해서 브리핑하는 메소드
       System.out.println("오늘의 피드백을 확인하겠습니다. 직원 여러분 모두 착석 부탁드립니다.")  // 직원들 있는데서 feedback읽고 브리핑하는 것
-      Feedback feedback = Feedback.getInstance();  // feedbackGetAndCheck에서 Feedback으로 변경
-        feedbackPay.checkFeedback();   // 피드백 확인하는 함수 
+        feedback.checkFeedback();   // 피드백 확인하는 함수 
         feedbackMent("음식", Feedback.foodRateMean, "쉐프");         // 음식의 feedback점수에 관한 평가
         feedbackMent("서비스", Feedback.serviceRateMean, "서버");    // 서비스의 feedback점수에 관한 평가
         feedbackMent("시설", Feedback.facilityRateMean);            // 시설의 feedback점수에 관한 평가
     }
 
-    public void openTheRestaurant() {    // 매니저가 영업을 시작하는 메소드
+    public void openRestaurant() {    // 매니저 영업을 시작 메소드
       System.out.println("현 시간부로 저희 매장의 영업을 시작하겠습니다. 12시 타임 손님께서는 지금부터 입장이 가능하십니다.")
     }
 
-    public void closeTheRestaurant() {    // 매니저가 라스트 오더를 마감하는 메소드
+    public void closeRestaurant() {    // 매니저 라스트 오더 마감 메소드
       System.out.println("현 시간부로 금일 저희 매장의 라스트 오더가 마감되었습니다. 손님 입장 및 기존 손님에 대해 추가 주문을 받지 않습니다. 감사합니다.")
     }
 
