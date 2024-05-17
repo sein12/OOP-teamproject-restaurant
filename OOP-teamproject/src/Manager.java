@@ -42,5 +42,7 @@ public class Manager extends Server{        // Manager class는 Server class를 
     public void closeRestaurant() {    // 매니저 라스트 오더 마감 메소드
       System.out.println("현 시간부로 금일 저희 매장의 라스트 오더가 마감되었습니다. 손님 입장 및 기존 손님에 대해 추가 주문을 받지 않습니다. 감사합니다.")
     }
-
+    public void SalesReport(){
+      System.out.println("오늘의 매출은 "+Sales.Sales+"원 입니다.");
+    }
 }
