@@ -1,13 +1,16 @@
 import java.util.Random;
 
 public class Hall {
-    Random random = new Random();
     private static Hall instance;
-    static Boolean[] seatList = { true }; // 공간정보를 담고 있는 리스트, 초기 좌석 상태를 의미함. true: 예약 가능, false: 예약 불가능. 현재는 좌석이 1개임.
+    private boolean[] seatList; // 공간정보를 담고 있는 리스트, 초기 좌석 상태를 의미함. true: 예약 가능, false: 예약 불가능. 현재는 좌석이 1개임.
+    private Random random;
 
+    // private 생성자
     private Hall() {
+        seatList = new boolean[] { true }; // 초기 좌석 상태는 예약 가능(true)
+        random = new Random();
     }
-
+    
     public static synchronized Hall getInstance() {
         if (instance == null) {
             instance = new Hall();
@@ -15,12 +18,13 @@ public class Hall {
         return instance;
     }
     
-    public Boolean[] getCurrentSeat() {
-        return seatList; // 현재 seat 정보를 반환함
+    // 현재 좌석 상태 반환 메서드
+    public boolean[] getCurrentSeat() {
+        return seatList;
     }
 
-    public void updateSeat(int index, Boolean isAvailable) throws IllegalArgumentException { // Spatial Data를 가지고 있는
-                                                                                             // list의 정보를 updated함.
+    // 좌석 상태 업데이트 메서드
+    public void updateSeat(int index, boolean isAvailable) {
         if (index >= 0 && index < seatList.length) {
             seatList[index] = isAvailable;
         } else {
