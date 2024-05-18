@@ -40,6 +40,7 @@ public class Manager extends Server{        // Manager class는 Server class를 
     }
 
     public void SalesReport() {
-        System.out.println("오늘의 매출은 " + Sales.Sales + "원 입니다.");
+        System.out.println("오늘의 매출은 " + Sales.
+ + "원 입니다.");
     }
 }
