@@ -1,24 +1,28 @@
 public class CardPay implements Pay {
     private static CardPay instance;
+    private double cardBalance; // 고객 카드값
+    private CouponCheckerandDiscount checker;
+    
+    private CardPay() {
+    	checker = new CouponCheckerandDiscount();
+    }
+
+
     public static synchronized CardPay getInstance() {
-    	
 		if (instance == null) {
             instance = new CardPay();
         }
         return instance;
     }
 
-    private double cardBalance; // 고객 카드값
-
+    public double getCardBalance() {
+        return cardBalance;
+    }
+    
     public void setCardBalance(double cardBalance) {
         this.cardBalance = cardBalance;
     }
 
-    public double getCardBalance() {
-        return cardBalance;
-    }
-
-    CouponCheckerandDiscount checker = new CouponCheckerandDiscount();
 
     // 오버라이드
     public void pay(double price) {
@@ -28,7 +32,7 @@ public class CardPay implements Pay {
             if (hasCoupon) {
                 checker.applyDiscount(price, hasCoupon);
             }
-	    Sales.Sales += price;
+            Sales.Sales += price;
             cardBalance -= price;
             System.out.println("카드로 결제가 완료되었습니다.");
         } else {
