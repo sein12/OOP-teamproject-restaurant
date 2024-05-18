@@ -38,9 +38,7 @@ public class Feedback {        //  getFeedbackAndGetPayied에서 FeedbackPay
             serviceRateSum += scanner.nextFloat();
             System.out.println("저희 매장의 시설에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ");
             facilityRateSum += scanner.nextFloat();
-            scanner.nextLine(); // 개행 문자 처리
-            System.out.println("저희 매장에 대해 자유로운 의견 남겨주세요: ");
-            String freeFeedback = scanner.nextLine();
+            scanner.nextLine(); // 개행 문자 처리 
             System.out.println("고객님의 소중한 의견 감사드립니다. 남겨주신 평가는 저희 매장의 발전에 굉장히 큰 도움이 됩니다.");
         }
     }
