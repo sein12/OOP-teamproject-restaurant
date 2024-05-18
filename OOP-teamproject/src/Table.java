@@ -59,7 +59,20 @@ public class Table {
         totalPrice += StockAndCost.getInstance().getDrinkPriceInt("술") * orderList[5];
     }
         
-    
+    public void printOrder() {
+        String[] menuItems = {
+            "황태해장국 정식", "순두부 정식", "뚝배기 불고기 정식", "전복 갈비탕", "탄산음료", "술"
+        };
+
+        System.out.println("현재 주문 내역:");
+        for (int i = 0; i < orderList.length; i++) {
+            if (orderList[i] > 0) {
+                System.out.println(menuItems[i] + ": " + orderList[i] + "개");
+            }
+        }
+
+        System.out.println("총 가격: " + totalPrice + "원");
+    }
 
     public void reset() { // 결제가 완료된 후 테이블 초기화
         totalPrice = 0;
@@ -82,25 +95,7 @@ public class Table {
         return orderList;
     }
 
-    /*
-     * public int[] getOrderNumber() {
-        return orderNumber;
-        }
-    */
-//-----------
-  //  public ArryList<String> getOrderList() {
-  //      return new ArrayList<>(orderList);
-  //  }
-
-  //  public ArrayList<Integer> getOrderNumber() {
-  //      return new ArrayList<>(orderNumber);
-  //  }
-
-  //  public int getTotalPrice() {
-  //      return totalPrice;
-  //  }
-    //-------------
-
+    
     public void isSeatOccupiedRandom() {
         // 랜덤한 참/거짓 값을 생성하여 시간에 따른 자리 차있는지 여부 확인
         Random random = new Random();

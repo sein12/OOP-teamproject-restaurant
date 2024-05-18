@@ -14,6 +14,9 @@ public class ReservationSystem{
         }
         return instance;
     }
+    public boolean isReserved(int timeSlot) {
+        return reservationTime[timeSlot];
+    }
 
     public void selectReservationTime() {
         Scanner scanner = new Scanner(System.in);

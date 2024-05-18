@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Preopen {
   public static Preopen instance;
   
