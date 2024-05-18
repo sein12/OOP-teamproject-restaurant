@@ -4,6 +4,9 @@ public class Preopen {
     private Chef chef = new Chef();
     private Manager manager = new Manager();
     private Server server = new Server();
+    
+    private ReservationSystem reservationSystem = ReservationSystem.getInstance(); // reservationsEntry 메서드에서 사용
+
 
     public void chooseJob() {
         Scanner scanner = new Scanner(System.in);
@@ -59,6 +62,7 @@ public class Preopen {
                 chefJob(); // 재귀 호출로 다시 선택하도록 함
                 break;
         }
+        chefJob();
     }
 
     public void managerJob() {
@@ -75,26 +79,29 @@ public class Preopen {
         switch (choice) {
             case 1:
                 RevenueAndCost.printFinanceReport();
+                managerJob();
                 break;
             case 2:
                 ReservationSystem.getInstance().callReservation();
+                managerJob();
                 break;
             case 3:
                 chooseJob();
                 return; // case 3에서 break를 추가하여 불필요한 재귀 호출을 방지
             case 9:
                 System.out.println("매장을 오픈합니다.");
-                // 오픈 로직 추가 가능
                 break;
             default:
                 System.out.println("잘못된 선택입니다. 다시 시도하세요.");
                 managerJob(); // 재귀 호출로 다시 선택하도록 함
                 break;
-        }
+        }   
     }
 
     public void guestJob() {
         System.out.println("손님으로 선택하셨습니다. 예약 시스템으로 이동합니다.");
         // 손님 관련 로직 추가 가능
+        reservationSystem.selectReservationTime();
+        chooseJob();
     }
 }
