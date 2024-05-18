@@ -1,12 +1,14 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Table {
     private int[] orderList;
     private int totalPrice;
     private boolean isAvailable;
-    static boolean isOccupied
+    static boolean isOccupied;
+    
     public Table() {
-        orderList = [0,0,0,0,0,0]; //[황태해장국 정식, 순두부 정식, 뚝배기 불고기 정식, 전북 갈비탕, 탄산음료, 술] fixed index
+        orderList = new int[]{0, 0, 0, 0, 0, 0}; //[황태해장국 정식, 순두부 정식, 뚝배기 불고기 정식, 전복 갈비탕, 탄산음료, 술]
         totalPrice = 0;
         isAvailable = true;
     }
@@ -49,20 +51,19 @@ public class Table {
 
     public void updateTotalPrice() {
         totalPrice = 0;
-                totalPrice += StockAndCost.getInstance().getDishPriceInt("황태해장국 정식") * orderList[0];
-                totalPrice += StockAndCost.getInstance().getDishPriceInt("순두부 정식") * orderList[1];
-                totalPrice += StockAndCost.getInstance().getDishPriceInt("뚝배기 불고기 정식") * orderList[2];
-                totalPrice += StockAndCost.getInstance().getDishPriceInt("전복 갈비탕") * orderList[3];
-                totalPrice += StockAndCost.getInstance().getDrinkPriceInt("탄산음료") * orderList[4];
-                totalPrice += StockAndCost.getInstance().getDrinkPriceInt("술") * orderList[5];
-            }
+        totalPrice += StockAndCost.getInstance().getDishPriceInt("황태해장국 정식") * orderList[0];
+        totalPrice += StockAndCost.getInstance().getDishPriceInt("순두부 정식") * orderList[1];
+        totalPrice += StockAndCost.getInstance().getDishPriceInt("뚝배기 불고기 정식") * orderList[2];
+        totalPrice += StockAndCost.getInstance().getDishPriceInt("전복 갈비탕") * orderList[3];
+        totalPrice += StockAndCost.getInstance().getDrinkPriceInt("탄산음료") * orderList[4];
+        totalPrice += StockAndCost.getInstance().getDrinkPriceInt("술") * orderList[5];
+    }
         
     
 
-    public void reset() { //결제가 완료된 후 table 초기화
+    public void reset() { // 결제가 완료된 후 테이블 초기화
         totalPrice = 0;
-        orderList = [0,0,0,0,0,0];
-        
+        orderList = new int[]{0, 0, 0, 0, 0, 0};
     }
 
     public int getTotalPrice() {
@@ -77,13 +78,15 @@ public class Table {
         isAvailable = available;
     }
 
-    public ArrayList<String> getOrderList() {
+    public int[] getOrderList() {
         return orderList;
     }
 
-    public ArrayList<Integer> getOrderNumber() {
+    /*
+     * public int[] getOrderNumber() {
         return orderNumber;
-    }
+        }
+    */
 //-----------
   //  public ArryList<String> getOrderList() {
   //      return new ArrayList<>(orderList);
@@ -101,17 +104,16 @@ public class Table {
     public void isSeatOccupiedRandom() {
         // 랜덤한 참/거짓 값을 생성하여 시간에 따른 자리 차있는지 여부 확인
         Random random = new Random();
-        randomValue = random.nextBoolean();
+        boolean randomValue = random.nextBoolean();
         isAvailable = randomValue;
         Hall.getInstance().updateSeat(0, randomValue);
 
-        isOccupied = random.nextBoolean();    // static한 isOccupied이 random.nextBoolean()값 바로 받는걸로
+        isOccupied = random.nextBoolean(); // static한 isOccupied가 random.nextBoolean() 값 받음
     }
 
-    private void seatOccupied(Boolean x){ //seat available 여부를 table field와 hall의 spatial list인 seatList에 수동 업데이트(예은/정우-예약에 따른 자리 업데이트, 손님 방문에 따른 자리 업데이트에 사용)
+    private void seatOccupied(Boolean x) { // seat available 여부를 테이블 필드와 hall의 공간 리스트인 seatList에 수동 업데이트
         isAvailable = x;
         Hall.getInstance().updateSeat(0, x);
     }
-    
-    }
+}
     
