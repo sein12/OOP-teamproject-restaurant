@@ -36,6 +36,7 @@ public class Chef {
                 StockAndCost.DishStock[i] += count; // update한 재고 개수만큼 재고에 update
                 
                 System.out.println(StockAndCost.DishMenu[i] + "의 재고가 성공적으로 추가되었습니다. 현재 " + StockAndCost.DishMenu[i] + "의 재고는 " + StockAndCost.DishStock[i] + "개 남아있습니다.");
+                System.out.println("=========================================================================================");
             }
         } else if ("감소".equals(answer)) {
             System.out.println("요리의 재고를 감소시키겠습니다.");
