@@ -14,6 +14,7 @@ public class ReservationSystem{
         }
         return instance;
     }
+    
     public boolean isReserved(int timeSlot) {
         return reservationTime[timeSlot];
     }
