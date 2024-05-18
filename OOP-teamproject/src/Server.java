@@ -2,14 +2,13 @@ import java.util.Scanner;
 import java.util.List;
 
 public class Server {
-    MenuCustomerPrice menuCustomerPrice = MenuCustomerPrice.getInstance();
-    StockAndCost stockAndCost = StockAndCost.getInstance();
-    ReservationSystem reservationSystem = ReservationSystem.getInstance();    // reservationsEntry 메서드에서 사용
-    CashPay cashPay = CashPay.getInstance(); // FeedbackPayied 메서드에서 사용
-    CardPay cardPay = CardPay.getInstance(); // FeedbackPayied 메서드에서 사용
-
-
-    Scanner scanner = new Scanner(System.in);
+	private MenuCustomerPrice menuCustomerPrice = MenuCustomerPrice.getInstance();
+    private StockAndCost stockAndCost = StockAndCost.getInstance();
+    private ReservationSystem reservationSystem = ReservationSystem.getInstance(); // reservationsEntry 메서드에서 사용
+    private CashPay cashPay = CashPay.getInstance(); // FeedbackPayied 메서드에서 사용
+    private CardPay cardPay = CardPay.getInstance(); // FeedbackPayied 메서드에서 사용
+    private Scanner scanner = new Scanner(System.in);
+    
     private int adults;
     private int children;
 
@@ -17,14 +16,14 @@ public class Server {
         System.out.println("안녕하세요. 식당에 오신 것을 환영합니다.");
     }
 
-    void reservationsEntry(int restaurantHours) { // 예약 입장 여부 메소드; (세인)메인에서 시각 매개변수로 넣어서 쓰세요.
-        System.out.println("이번 " + restaurantHours + "시 타임에 대해 예약 확인해 드리겠습니다.") // Table.currentTime으로 받아와서 쓸거임.                                                                            
-        if (reservationSystem.reservationtime[restaurantHours - 12]) { // ReservationSystem class의 reservationtime list
+    void reservationsEntry(int restaurantHours) { // 예약 입장 여부 메소드
+        System.out.println("이번 " + restaurantHours + "시 타임에 대해 예약 확인해 드리겠습니다.");
+        if (reservationSystem.isReserved(restaurantHours - 12)) { // ReservationSystem 클래스의 메서드 사용
             System.out.println("이번 타임에 대해 예약 확인 되었습니다. 바로 입장 도와드리겠습니다.");
             countAdultsAndChildren();
         } else {
             System.out.println("이번 타임에 대해 확인된 예약이 없습니다. 현장 입장 안내해드리겠습니다.");
-            this.onTheSpotEntry(); // else이면 현장 입장 메소드를 call함.
+            this.onTheSpotEntry(restaurantHours);
         }
     }
 
@@ -49,42 +48,57 @@ public class Server {
 
     void menuGuidance() { // 모든 메뉴 안내 메소드; 가격도 포함
         System.out.println("**********요리**********");
-        for (int i = 0; i < MenuCustomerPrice.courseMenu.size(); i++) { // courseMenu index값 개수만큼 메뉴와 가격을 나란히 출력을 반복
-            System.out.print(MenuCustomerPrice.courseMenu[i] + "    "); // 요리명과 가격을 나란히 출력할 수 있도록 print하고 enter안함.
-            System.out.println(MenuCustomerPrice.coursePriceInt[i]); // 다음 요리명과 가격을출력하기 위해 개행
+        String[] courseMenu = menuCustomerPrice.getCourseMenuList();
+        int[] coursePrice = menuCustomerPrice.getCoursePriceInt();
+        for (int i = 0; i < courseMenu.length; i++) {
+            System.out.println(courseMenu[i] + "    " + coursePrice[i] + "원");
         }
+
         System.out.println("**********음료**********");
-        for (int j = 0; j < MenuCustomerPrice.drinkMenu.size(); j++) { // drinkMenu index값 개수만큼 메뉴와 가격을 나란히 출력을 반복
-            System.out.print(MenuCustomerPrice.drinkMenu[j] + "    "); // 음료명과 가격을 나란히 출력할 수 있도록 print하고 enter안함.
-            System.out.println(MenuCustomerPrice.drinkPriceInt[j]); // 다음 요리명과 가격을출력하기 위해 개행
+        String[] drinkMenu = menuCustomerPrice.getDrinkMenuList();
+        int[] drinkPrice = menuCustomerPrice.getDrinkPriceInt();
+        for (int j = 0; j < drinkMenu.length; j++) {
+            System.out.println(drinkMenu[j] + "    " + drinkPrice[j] + "원");
         }
     }
 
     void standby() { // 서버호출&대기 메소드
         System.out.println("필요한 것이 있으면 \"Server\"라고 불러주세요.");
+        scanner.nextLine(); // 개행 문자 처리
         String answer = scanner.nextLine();
 
-        if (answer.equals("Server")) {
+        if (answer.equalsIgnoreCase("Server")) {
             System.out.println("무엇을 도와드릴까요?(옵션: 주문하기 / 매니저 호출 / 주문 내역 / 결제)");
             String answer2 = scanner.nextLine();
 
-            if (answer2.equals("주문하기")) {
-                // 주문 메서드 넣기
-            } else if (answer2.equals("매니저 호출")) {
-                // 메니저 클래스 만들고 갖다 쓰던지 하기
-            } else if (answer2.equals("결제")) {
-                // 결제 메서드 넣기
-            } else if (answer2.equals("주문 내역")) {
-                // 주문 내역 메서드 넣기
-            } else {
-                System.out.println("올바른 옵션을 선택하지 않으셨습니다. 주문하기, 매니저 호출, 주문 내역 또는 결제 중에서 선택해주세요.");
-                standby();// else일 때만 standby()를 재귀로 다시 호출
+            switch (answer2) {
+                case "주문하기":
+                    orderManager();
+                    break;
+                case "매니저 호출":
+                    callManager();
+                    break;
+                case "결제":
+                    double totalPrice = Main.table1.getTotalPrice();
+                    FeedbackPayied(totalPrice);
+                    break;
+                case "주문 내역":
+                    Main.table1.printOrder();
+                    break;
+                default:
+                    System.out.println("올바른 옵션을 선택하지 않으셨습니다. 주문하기, 매니저 호출, 주문 내역 또는 결제 중에서 선택해주세요.");
+                    standby();
+                    break;
             }
         }
     }
+    
+    void callManager() {
+        System.out.println("매니저를 호출합니다.");
+        // 매니저 호출 로직을 추가할 수 있습니다.
+    }
 
     void orderManager() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("주문을 도와드리겠습니다.");
         System.out.println("아래의 메뉴 중 원하시는 메뉴의 수량을 입력해주세요.");
 
@@ -92,13 +106,13 @@ public class Server {
         String[] drinkMenu = StockAndCost.drinkMenu;
 
         for (int i = 0; i < courseMenu.length; i++) {
-            System.out.println((i + 1) + ". " + courseMenu[i] + " - " + StockAndCost.DishPriceInt[i] + "원");
-    
+            System.out.println((i + 1) + ". " + courseMenu[i] + " - " + stockAndCost.getDishPriceInt(courseMenu[i]) + "원");
         }
+        
         for (int i = 0; i < drinkMenu.length; i++) {
-            System.out.println(
-                    (courseMenu.length + i + 1) + ". " + drinkMenu[i] + " - " + StockAndCost.drinkPriceInt[i] + "원");
+            System.out.println((courseMenu.length + i + 1) + ". " + drinkMenu[i] + " - " + stockAndCost.getDrinkPriceInt(drinkMenu[i]) + "원");
         }
+
 
         boolean ordering = true;
 
