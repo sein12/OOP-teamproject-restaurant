@@ -9,8 +9,10 @@ public class RevenueAndCost {
 
     public static void printFinanceReport() {
         int netProfit = calculateNetProfit(); // netProfit을 계산
+    	System.out.println("===========================================");
         System.out.println("오늘의 총 수익: " + revenue);
         System.out.println("오늘의 총 지출: " + expenses);
         System.out.println("오늘의 순이익: " + netProfit); // netProfit 출력
+    	System.out.println("===========================================");
     }
 }
