@@ -8,11 +8,14 @@ public class DuringOpen {
 
     public void openRestaurant() {
         printBanner("매장이 오픈했습니다. 영업을 시작합니다.");
+        /*
         for (int hour = 12; hour <= 18; hour++) {
             printBanner("현재 시간: " + hour + ":00");
             handleCustomer(hour);
         }
-        closeRestaurant();
+        */
+        printBanner("현재 시간: " + 12 + ":00");
+        handleCustomer(12);
     }
 
     private void handleCustomer(int hour) {
@@ -42,10 +45,6 @@ public class DuringOpen {
         printBanner("현재 시간 " + hour + ":00의 손님 처리가 완료되었습니다. 다음 손님을 맞이합니다.");
     }
 
-    private void closeRestaurant() {
-        printBanner("영업이 종료되었습니다. 매출 보고서를 출력합니다.");
-        manager.SalesReport();
-    }
 
     private void printBanner(String message) {
         System.out.println("===========================================");

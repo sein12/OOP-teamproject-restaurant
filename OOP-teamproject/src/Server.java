@@ -124,7 +124,6 @@ public class Server {
             System.out.println((courseMenu.length + i + 1) + ". " + drinkMenu[i] + " - " + stockAndCost.getDrinkPriceInt(drinkMenu[i]) + "원");
         }
 
-
         boolean ordering = true;
 
         while (ordering) {
@@ -138,13 +137,16 @@ public class Server {
                 } else {
                     String selectedMenu = "";
                     int stock = 0;
+                    int price = 0;
 
                     if (menuNumber > 0 && menuNumber <= courseMenu.length) {
                         selectedMenu = courseMenu[menuNumber - 1];
                         stock = StockAndCost.getInstance().getDishStock(selectedMenu);
+                        price = StockAndCost.getInstance().getDishPriceInt(selectedMenu);
                     } else if (menuNumber > courseMenu.length && menuNumber <= courseMenu.length + drinkMenu.length) {
                         selectedMenu = drinkMenu[menuNumber - 1 - courseMenu.length];
                         stock = StockAndCost.getInstance().getDrinkStock(selectedMenu);
+                        price = StockAndCost.getInstance().getDrinkPriceInt(selectedMenu);
                     } else {
                         printBanner("잘못된 메뉴 번호입니다.", RED);
                         continue;
@@ -158,15 +160,13 @@ public class Server {
                         // 주문이 가능하면 재고를 줄이고 주문을 처리
                         if (menuNumber > 0 && menuNumber <= courseMenu.length) {
                             StockAndCost.getInstance().subtractCourseStock(selectedMenu, quantity);
-                            Main.table1.orderUpdated(selectedMenu, quantity);
-                            Main.table1.updateTotalPrice();
-                        } else if (menuNumber > courseMenu.length
-                                && menuNumber <= courseMenu.length + drinkMenu.length) {
+                        } else if (menuNumber > courseMenu.length && menuNumber <= courseMenu.length + drinkMenu.length) {
                             StockAndCost.getInstance().subtractDrinkStock(selectedMenu, quantity);
-                            Main.table1.orderUpdated(selectedMenu, quantity);
-                            Main.table1.updateTotalPrice();
-
                         }
+
+                        Main.table1.orderUpdated(selectedMenu, Main.table1.getOrderCount(selectedMenu) + quantity); // 기존 주문에 추가
+                        Main.table1.updateTotalPrice();
+                        RevenueAndCost.revenue += price * quantity;
                         printBanner(selectedMenu + "을/를 " + quantity + "개 주문했습니다.", GREEN);
                     } else {
                         // 재고가 부족할 경우

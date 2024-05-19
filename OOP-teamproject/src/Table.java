@@ -19,27 +19,21 @@ public class Table {
                 case "황태해장국 정식":
                     orderList[0] = number;
                     break;
-
                 case "순두부 정식":
                     orderList[1] = number;
                     break;
-
                 case "뚝배기 불고기 정식":
                     orderList[2] = number;
                     break;
-                    
                 case "전복 갈비탕":
                     orderList[3] = number;
                     break;
-                    
                 case "탄산음료":
                     orderList[4] = number;
                     break;
-                    
                 case "술":
                     orderList[5] = number;
                     break;
-                    
                 default:
                     System.out.println("Please type correct menu!");
                     break;
@@ -64,10 +58,10 @@ public class Table {
             "황태해장국 정식", "순두부 정식", "뚝배기 불고기 정식", "전복 갈비탕", "탄산음료", "술"
         };
 
-        System.out.println("현재 주문 내역:");
+        System.out.println("현재 주문 내역");
         for (int i = 0; i < orderList.length; i++) {
             if (orderList[i] > 0) {
-                System.out.println(menuItems[i] + ": " + orderList[i] + "개");
+                System.out.println("- " + menuItems[i] + ": " + orderList[i] + "개");
             }
         }
 
@@ -95,7 +89,25 @@ public class Table {
         return orderList;
     }
 
-    
+    public int getOrderCount(String menuItem) {
+        switch (menuItem) {
+            case "황태해장국 정식":
+                return orderList[0];
+            case "순두부 정식":
+                return orderList[1];
+            case "뚝배기 불고기 정식":
+                return orderList[2];
+            case "전복 갈비탕":
+                return orderList[3];
+            case "탄산음료":
+                return orderList[4];
+            case "술":
+                return orderList[5];
+            default:
+                return 0;
+        }
+    }
+
     public void isSeatOccupiedRandom() {
         // 랜덤한 참/거짓 값을 생성하여 시간에 따른 자리 차있는지 여부 확인
         Random random = new Random();
@@ -111,4 +123,3 @@ public class Table {
         Hall.getInstance().updateSeat(0, x);
     }
 }
-    

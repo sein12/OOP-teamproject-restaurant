@@ -1,9 +1,10 @@
 public class Main {
     // Essential Physical Resource in the Main!
     public static Table table1 = new Table();
-    public static Preopen pre = new Preopen();
+    public static PreOpen pre = new PreOpen();
     public static DuringOpen duringOpen = new DuringOpen();
-
+    public static AfterOpen afterOpen = new AfterOpen();
+    
     public static void main(String[] args) {
         System.out.println("레스토랑 프로젝트");
         System.out.println("------------");
@@ -17,5 +18,7 @@ public class Main {
         if (pre.openStore) {
             duringOpen.openRestaurant();
         }
+        
+        afterOpen.closeOperations();
     }
 }
