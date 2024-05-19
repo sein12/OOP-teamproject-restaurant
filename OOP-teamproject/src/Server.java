@@ -48,8 +48,10 @@ public class Server {
         System.out.println(CYAN + "성인과 청소년/어린이 수를 입력해주세요." + RESET);
         System.out.print("성인: ");
         adults = scanner.nextInt();
+        scanner.nextLine(); // 개행 문자 처리
         System.out.print("청소년/어린이: ");
         children = scanner.nextInt();
+        scanner.nextLine(); // 개행 문자 처리
         System.out.println(GREEN + "입력이 완료되었습니다." + RESET);
     }
 
@@ -70,32 +72,34 @@ public class Server {
     }
 
     void standby() { // 서버호출&대기 메소드
-        printBanner("필요한 것이 있으면 \"Server\"라고 불러주세요.", CYAN);
-        scanner.nextLine(); // 개행 문자 처리
-        String answer = scanner.nextLine();
+        while (true) {
+            printBanner("필요한 것이 있으면 \"저기요\"라고 불러주세요.", CYAN);
+            String answer = scanner.nextLine();
 
-        if (answer.equalsIgnoreCase("Server")) {
-            printBanner("무엇을 도와드릴까요? (옵션: 주문하기 / 매니저 호출 / 주문 내역 / 결제)", CYAN);
-            String answer2 = scanner.nextLine();
+            if (answer.equalsIgnoreCase("저기요")) {
+                printBanner("무엇을 도와드릴까요? (옵션: 주문하기 / 매니저 호출 / 주문 내역 / 결제)", CYAN);
+                String answer2 = scanner.nextLine();
 
-            switch (answer2) {
-                case "주문하기":
-                    orderManager();
-                    break;
-                case "매니저 호출":
-                    callManager();
-                    break;
-                case "결제":
-                    double totalPrice = Main.table1.getTotalPrice();
-                    FeedbackPayied(totalPrice);
-                    break;
-                case "주문 내역":
-                    Main.table1.printOrder();
-                    break;
-                default:
-                    printBanner("올바른 옵션을 선택하지 않으셨습니다. 주문하기, 매니저 호출, 주문 내역 또는 결제 중에서 선택해주세요.", RED);
-                    standby();
-                    break;
+                switch (answer2) {
+                    case "주문하기":
+                        orderManager();
+                        break;
+                    case "매니저 호출":
+                        callManager();
+                        break;
+                    case "결제":
+                        double totalPrice = Main.table1.getTotalPrice();
+                        FeedbackPayied(totalPrice);
+                        return; // 결제가 완료되면 메서드 종료
+                    case "주문 내역":
+                        Main.table1.printOrder();
+                        break;
+                    default:
+                        printBanner("올바른 옵션을 선택하지 않으셨습니다. 주문하기, 매니저 호출, 주문 내역 또는 결제 중에서 선택해주세요.", RED);
+                        break;
+                }
+            } else {
+                printBanner("올바른 호출이 아닙니다. 다시 시도해주세요.", RED);
             }
         }
     }
@@ -127,6 +131,7 @@ public class Server {
             try {
                 System.out.println("메뉴 번호를 입력해주세요 (종료는 0): ");
                 int menuNumber = scanner.nextInt();
+                scanner.nextLine(); // 개행 문자 처리
 
                 if (menuNumber == 0) {
                     ordering = false;
@@ -147,6 +152,7 @@ public class Server {
 
                     System.out.println(selectedMenu + "을/를 몇 개 주문하시겠습니까?");
                     int quantity = scanner.nextInt();
+                    scanner.nextLine(); // 개행 문자 처리
 
                     if (quantity <= stock) {
                         // 주문이 가능하면 재고를 줄이고 주문을 처리
@@ -165,7 +171,6 @@ public class Server {
                     } else {
                         // 재고가 부족할 경우
                         printBanner("최대 " + stock + "개만 주문 가능합니다.", RED);
-                        orderManager(); // 재귀 호출로 다시 주문 받기
                     }
                 }
             } catch (Exception e) {

@@ -35,7 +35,6 @@ public class DuringOpen {
         server.standby();
         
 
-        printBanner("주문이 완료되었습니다. 결제를 진행합니다.");
         double totalPrice = table1.getTotalPrice();
         server.FeedbackPayied(totalPrice);
         table1.reset(); // 결제 후 테이블 초기화
