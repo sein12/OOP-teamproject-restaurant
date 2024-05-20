@@ -7,6 +7,7 @@ public class Server {
     private CashPay cashPay = CashPay.getInstance();
     private CardPay cardPay = CardPay.getInstance();
     private Scanner scanner = new Scanner(System.in);
+    private Customer currentCustomer;
 
     private int adults;
     private int children;
@@ -20,27 +21,35 @@ public class Server {
     private static final String CYAN = "\u001B[36m";
     private static final String BOLD = "\u001B[1m";
 
+    void setCurrentCustomer(Customer customer) {
+        this.currentCustomer = customer;
+    }
+
+    Customer getCurrentCustomer() {
+        return this.currentCustomer;
+    }
+
     void welcome() { // 인사 메소드
         printLightBanner("안녕하세요. 식당에 오신 것을 환영합니다.", RESET);
     }
 
     void reservationsEntry(int restaurantHours) { // 예약 입장 여부 메소드
-    	printLightBanner("이번 " + restaurantHours + "시 타임에 대해 예약 확인해 드리겠습니다.", RESET);
+        printLightBanner("이번 " + restaurantHours + "시 타임에 대해 예약 확인해 드리겠습니다.", RESET);
         if (reservationSystem.isReserved(restaurantHours - 12)) {
-        	printLightBanner("이번 타임에 대해 예약 확인 되었습니다. 바로 입장 도와드리겠습니다.", RESET);
+            printLightBanner("이번 타임에 대해 예약 확인 되었습니다. 바로 입장 도와드리겠습니다.", RESET);
             countAdultsAndChildren();
         } else {
-        	printLightBanner("이번 타임에 대해 확인된 예약이 없습니다. 현장 입장 안내해드리겠습니다.", YELLOW);
+            printLightBanner("이번 타임에 대해 확인된 예약이 없습니다. 현장 입장 안내해드리겠습니다.", YELLOW);
             this.onTheSpotEntry(restaurantHours);
         }
     }
 
     void onTheSpotEntry(int restaurantHours) { // 현장 입장 확인 메소드
-    	printLightBanner("이번 " + restaurantHours + "시 타임에 대해 현장 입장 가능한지 확인해드리겠습니다.", RESET);
+        printLightBanner("이번 " + restaurantHours + "시 타임에 대해 현장 입장 가능한지 확인해드리겠습니다.", RESET);
         if (Table.isOccupied) {
-        	printLightBanner("죄송합니다. 남아있는 자리가 없으므로 현재 타임에는 식당 이용이 불가합니다. 다른 타임에 다시 방문하거나 다른 날짜에 대해 예약 후 방문해주세요.", RESET);
+            printLightBanner("죄송합니다. 남아있는 자리가 없으므로 현재 타임에는 식당 이용이 불가합니다. 다른 타임에 다시 방문하거나 다른 날짜에 대해 예약 후 방문해주세요.", RESET);
         } else {
-        	printLightBanner("현재 남아있는 좌석이 있습니다. 입장 도와드리겠습니다.", GREEN);
+            printLightBanner("현재 남아있는 좌석이 있습니다. 입장 도와드리겠습니다.", GREEN);
             countAdultsAndChildren();
         }
     }
@@ -111,8 +120,8 @@ public class Server {
     }
 
     void orderManager() {
-    	printLightBanner("주문을 도와드리겠습니다.", RESET);
-    	printLightBanner("아래의 메뉴 중 원하시는 메뉴의 수량을 입력해주세요.", CYAN);
+        printLightBanner("주문을 도와드리겠습니다.", RESET);
+        printLightBanner("아래의 메뉴 중 원하시는 메뉴의 수량을 입력해주세요.", CYAN);
 
         String[] courseMenu = StockAndCost.DishMenu;
         String[] drinkMenu = StockAndCost.drinkMenu;
@@ -129,7 +138,7 @@ public class Server {
 
         while (ordering) {
             try {
-            	printBanner("메뉴 번호를 입력해주세요 (종료는 0): ", CYAN);
+                printBanner("메뉴 번호를 입력해주세요 (종료는 0): ", CYAN);
                 int menuNumber = scanner.nextInt();
                 scanner.nextLine(); // 개행 문자 처리
 
@@ -148,8 +157,13 @@ public class Server {
                         selectedMenu = drinkMenu[menuNumber - 1 - courseMenu.length];
                         stock = StockAndCost.getInstance().getDrinkStock(selectedMenu);
                         price = StockAndCost.getInstance().getDrinkPriceInt(selectedMenu);
+
+                        if (selectedMenu.equals("술") && adults < 1) {
+                            System.out.println("미성년자는 술을 구입할 수 없습니다.");
+                            continue;
+                        }
                     } else {
-                        printBanner("잘못된 메뉴 번호입니다.", RED);
+                        System.out.println("잘못된 메뉴 번호입니다.");
                         continue;
                     }
 
