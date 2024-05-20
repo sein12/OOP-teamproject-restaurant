@@ -26,8 +26,11 @@ public class CardPay implements Pay {
 
     // 오버라이드
     public void pay(double price) {
-        System.out.println("결제하시겠습니까?");
+        while (price > 0) {
+            System.out.println("결제하시겠습니까?");
         if (cardBalance >= price) {
+
+            System.out.println("결제하실 금액은 "+price+"원 입니다.");
             boolean hasCoupon = checker.askCoupon();
             if (hasCoupon) {
                 checker.applyDiscount(price, hasCoupon);
@@ -39,4 +42,5 @@ public class CardPay implements Pay {
             System.out.println("카드 잔액이 부족하여 결제를 완료할 수 없습니다.");
         }
     }
+   }
 }

@@ -1,6 +1,7 @@
 public class Main {
     // Essential Physical Resource in the Main!
     public static Table table1 = new Table();
+    
     public static PreOpen pre = new PreOpen();
     public static DuringOpen duringOpen = new DuringOpen();
     public static AfterOpen afterOpen = new AfterOpen();

@@ -29,15 +29,17 @@ public class CashPay implements Pay {
     }
     
 
-    // 오버라이드
     public void pay(double price) {
+        while (price > 0) {
           System.out.println("결제하시겠습니까?");
+
           if (cashBalance >= price) {
+              System.out.println("결제하실 금액은 "+price+"원 입니다.");
               boolean hasCoupon = checker.askCoupon();
               if (hasCoupon) {
                       checker.applyDiscount(price, hasCoupon);
               }
-              cashBalance -= price;	
+              cashBalance -= price;   
               Sales.Sales += price;
               System.out.println("현금으로 결제가 완료되었습니다.");
               calculateChange(cashBalance, price);
@@ -45,4 +47,5 @@ public class CashPay implements Pay {
               System.out.println("현금 잔액이 부족하여 결제를 완료할 수 없습니다.");
           }
       }
+        }
 }

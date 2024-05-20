@@ -36,7 +36,6 @@ public class ReservationSystem{
     }
 
     public void callReservation() {
-    	System.out.println("===========================================");
         for (int i = 0; i < reservationTime.length; i++) {
             if (reservationTime[i]) {
                 System.out.println("오늘 " + (i + 12) + "시에 예약이 준비되어 있습니다.");

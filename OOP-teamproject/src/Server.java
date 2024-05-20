@@ -111,8 +111,8 @@ public class Server {
     }
 
     void orderManager() {
-        printBanner("주문을 도와드리겠습니다.", CYAN);
-        System.out.println("아래의 메뉴 중 원하시는 메뉴의 수량을 입력해주세요.");
+    	printLightBanner("주문을 도와드리겠습니다.", RESET);
+    	printLightBanner("아래의 메뉴 중 원하시는 메뉴의 수량을 입력해주세요.", CYAN);
 
         String[] courseMenu = StockAndCost.DishMenu;
         String[] drinkMenu = StockAndCost.drinkMenu;
@@ -129,7 +129,7 @@ public class Server {
 
         while (ordering) {
             try {
-                System.out.println("메뉴 번호를 입력해주세요 (종료는 0): ");
+            	printBanner("메뉴 번호를 입력해주세요 (종료는 0): ", CYAN);
                 int menuNumber = scanner.nextInt();
                 scanner.nextLine(); // 개행 문자 처리
 
@@ -153,7 +153,7 @@ public class Server {
                         continue;
                     }
 
-                    System.out.println(selectedMenu + "을/를 몇 개 주문하시겠습니까?");
+                    printBanner(selectedMenu + "을/를 몇 개 주문하시겠습니까?", CYAN);
                     int quantity = scanner.nextInt();
                     scanner.nextLine(); // 개행 문자 처리
 
@@ -195,9 +195,9 @@ public class Server {
     }
 
     private void printBanner(String message, String color) {
-        System.out.println(color + BOLD + "===========================================");
+        System.out.println(color + BOLD + "======================================================================");
         System.out.println(message);
-        System.out.println("===========================================" + RESET);
+        System.out.println("======================================================================" + RESET);
     }
     
     private void printLightBanner(String message, String color) {
