@@ -5,26 +5,32 @@ public class AfterOpen {
     private Manager manager = new Manager();
     private Scanner scanner = new Scanner(System.in);
 
+    private static final String RESET = "\u001B[0m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String BLUE = "\u001B[34m";
+    private static final String PURPLE = "\u001B[35m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String BOLD = "\u001B[1m";
+
     public void closeOperations() {
-        printBanner("매장이 영업을 종료했습니다. 이제 마감 작업을 시작합니다.", "\u001B[35m");
+        printBanner("매장이 영업을 종료했습니다. 이제 마감 작업을 시작합니다.", PURPLE);
 
         while (true) {
-            System.out.println("\u001B[36m===========================================");
-            System.out.println("당신의 직업을 선택해주세요:");
-            System.out.println("셰프 | 매니저");
-            System.out.println("===========================================\u001B[0m");
+            printBanner("당신의 직업을 선택해주세요: 셰프 | 매니저", CYAN);
             
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "셰프":
-                	chefOperations();
+                    chefOperations();
                     break;
                 case "매니저":
-                	managerOperations();
+                    managerOperations();
                     break;
                 default:
-                    printBanner("잘못된 선택입니다. 다시 시도하세요.", "\u001B[31m");
+                    printBanner("잘못된 선택입니다. 다시 시도하세요.", RED);
                     break;
             }
         }
@@ -32,11 +38,10 @@ public class AfterOpen {
 
     private void chefOperations() {
         while (true) {
-            System.out.println("\u001B[36m===========================================");
-            System.out.println("셰프로 선택하셨습니다. 할 일을 선택해주세요:");
-            System.out.println("1. 재고 확인");
-            System.out.println("2. 직업 선택으로 돌아가기");
-            System.out.println("===========================================\u001B[0m");
+            printBanner("셰프로 선택하셨습니다. 할 일을 선택해주세요:", CYAN);
+            System.out.println(CYAN + "1. 재고 확인" + RESET);
+            System.out.println(CYAN + "2. 직업 선택으로 돌아가기" + RESET);
+            System.out.println(CYAN + "===========================================" + RESET);
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // 개행 문자 처리
@@ -49,7 +54,7 @@ public class AfterOpen {
                 case 2:
                     return; // 메서드 종료 후 직업 선택으로 돌아감
                 default:
-                    printBanner("잘못된 선택입니다. 다시 시도하세요.", "\u001B[31m");
+                    printBanner("잘못된 선택입니다. 다시 시도하세요.", RED);
                     break;
             }
         }
@@ -57,13 +62,12 @@ public class AfterOpen {
 
     private void managerOperations() {
         while (true) {
-            System.out.println("\u001B[36m===========================================");
-            System.out.println("매니저로 선택하셨습니다. 할 일을 선택해주세요:");
-            System.out.println("1. 피드백 검토");
-            System.out.println("2. 재무 관리");
-            System.out.println("3. 직업 선택으로 돌아가기");
-            System.out.println("9. 프로그램 종료");
-            System.out.println("===========================================\u001B[0m");
+            printBanner("매니저로 선택하셨습니다. 할 일을 선택해주세요:", CYAN);
+            System.out.println(CYAN + "1. 피드백 검토" + RESET);
+            System.out.println(CYAN + "2. 재무 관리" + RESET);
+            System.out.println(CYAN + "3. 직업 선택으로 돌아가기" + RESET);
+            System.out.println(CYAN + "9. 프로그램 종료" + RESET);
+            System.out.println(CYAN + "===========================================" + RESET);
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // 개행 문자 처리
@@ -78,10 +82,10 @@ public class AfterOpen {
                 case 3:
                     return; // 메서드 종료 후 직업 선택으로 돌아감
                 case 9:
-                    printBanner("프로그램을 종료합니다. 수고하셨습니다!", "\u001B[32m");
+                    printBanner("프로그램을 종료합니다. 수고하셨습니다!", GREEN);
                     System.exit(0); // 프로그램 종료
                 default:
-                    printBanner("잘못된 선택입니다. 다시 시도하세요.", "\u001B[31m");
+                    printBanner("잘못된 선택입니다. 다시 시도하세요.", RED);
                     break;
             }
         }
@@ -90,17 +94,16 @@ public class AfterOpen {
     private void reviewFeedback() {
         Feedback feedback = Feedback.getInstance();
         feedback.setFeedback(); // 피드백 평균값 계산
-        System.out.println("\u001B[36m===========================================");
-        System.out.println("피드백 검토:");
-        System.out.println("음식 평점: " + Feedback.foodRateMean);
-        System.out.println("서비스 평점: " + Feedback.serviceRateMean);
-        System.out.println("시설 평점: " + Feedback.facilityRateMean);
-        System.out.println("===========================================\u001B[0m");
+        printBanner("피드백 검토:", CYAN);
+        System.out.println(CYAN + "음식 평점: " + Feedback.foodRateMean + RESET);
+        System.out.println(CYAN + "서비스 평점: " + Feedback.serviceRateMean + RESET);
+        System.out.println(CYAN + "시설 평점: " + Feedback.facilityRateMean + RESET);
+        System.out.println(CYAN + "===========================================" + RESET);
     }
 
     private void printBanner(String message, String color) {
-        System.out.println(color + "===========================================");
+        System.out.println(color + BOLD + "===========================================");
         System.out.println(message);
-        System.out.println("===========================================" + "\u001B[0m");
+        System.out.println("===========================================" + RESET);
     }
 }

@@ -3,11 +3,11 @@ import java.util.Scanner;
 public class Server {
     private MenuCustomerPrice menuCustomerPrice = MenuCustomerPrice.getInstance();
     private StockAndCost stockAndCost = StockAndCost.getInstance();
-    private ReservationSystem reservationSystem = ReservationSystem.getInstance(); // reservationsEntry 메서드에서 사용
-    private CashPay cashPay = CashPay.getInstance(); // FeedbackPayied 메서드에서 사용
-    private CardPay cardPay = CardPay.getInstance(); // FeedbackPayied 메서드에서 사용
-    private Scanner scanner = new Scanner(System.in); // Scanner 객체를 클래스 레벨에서 한 번만 생성
-    
+    private ReservationSystem reservationSystem = ReservationSystem.getInstance();
+    private CashPay cashPay = CashPay.getInstance();
+    private CardPay cardPay = CardPay.getInstance();
+    private Scanner scanner = new Scanner(System.in);
+
     private int adults;
     private int children;
 
@@ -18,28 +18,29 @@ public class Server {
     private static final String BLUE = "\u001B[34m";
     private static final String PURPLE = "\u001B[35m";
     private static final String CYAN = "\u001B[36m";
+    private static final String BOLD = "\u001B[1m";
 
     void welcome() { // 인사 메소드
-        printBanner("안녕하세요. 식당에 오신 것을 환영합니다.", BLUE);
+        printLightBanner("안녕하세요. 식당에 오신 것을 환영합니다.", RESET);
     }
 
     void reservationsEntry(int restaurantHours) { // 예약 입장 여부 메소드
-        printBanner("이번 " + restaurantHours + "시 타임에 대해 예약 확인해 드리겠습니다.", PURPLE);
-        if (reservationSystem.isReserved(restaurantHours - 12)) { // ReservationSystem 클래스의 메서드 사용
-            printBanner("이번 타임에 대해 예약 확인 되었습니다. 바로 입장 도와드리겠습니다.", GREEN);
+    	printLightBanner("이번 " + restaurantHours + "시 타임에 대해 예약 확인해 드리겠습니다.", RESET);
+        if (reservationSystem.isReserved(restaurantHours - 12)) {
+        	printLightBanner("이번 타임에 대해 예약 확인 되었습니다. 바로 입장 도와드리겠습니다.", RESET);
             countAdultsAndChildren();
         } else {
-            printBanner("이번 타임에 대해 확인된 예약이 없습니다. 현장 입장 안내해드리겠습니다.", YELLOW);
+        	printLightBanner("이번 타임에 대해 확인된 예약이 없습니다. 현장 입장 안내해드리겠습니다.", YELLOW);
             this.onTheSpotEntry(restaurantHours);
         }
     }
 
-    void onTheSpotEntry(int restaurantHours) { // 현장 입장 확인 메소드; (세인)메인에서 시각 매개변수로 넣어서 쓰세요.
-        printBanner("이번 " + restaurantHours + "시 타임에 대해 현장 입장 가능한지 확인해드리겠습니다.", PURPLE);
-        if (Table.isOccupied) { // (세인) if문 돌아가기 전에 Table에서 isOccupied에 bool값 할당 위해 Table의 함수 호출 필요
-            printBanner("죄송합니다. 남아있는 자리가 없으므로 현재 타임에는 식당 이용이 불가합니다. 다른 타임에 다시 방문하거나 다른 날짜에 대해 예약 후 방문해주세요.", RED);
-        } else { // isOccupied == false면; 꽉 안참. 자리 안
-            printBanner("현재 남아있는 좌석이 있습니다. 입장 도와드리겠습니다.", GREEN);
+    void onTheSpotEntry(int restaurantHours) { // 현장 입장 확인 메소드
+    	printLightBanner("이번 " + restaurantHours + "시 타임에 대해 현장 입장 가능한지 확인해드리겠습니다.", RESET);
+        if (Table.isOccupied) {
+        	printLightBanner("죄송합니다. 남아있는 자리가 없으므로 현재 타임에는 식당 이용이 불가합니다. 다른 타임에 다시 방문하거나 다른 날짜에 대해 예약 후 방문해주세요.", RESET);
+        } else {
+        	printLightBanner("현재 남아있는 좌석이 있습니다. 입장 도와드리겠습니다.", GREEN);
             countAdultsAndChildren();
         }
     }
@@ -56,14 +57,14 @@ public class Server {
     }
 
     void menuGuidance() { // 모든 메뉴 안내 메소드; 가격도 포함
-        System.out.println(YELLOW + "**********요리**********" + RESET);
+        System.out.println(YELLOW + BOLD + "********** 요리 **********" + RESET);
         String[] courseMenu = menuCustomerPrice.getCourseMenuList();
         int[] coursePrice = menuCustomerPrice.getCoursePriceInt();
         for (int i = 0; i < courseMenu.length; i++) {
             System.out.println(courseMenu[i] + "    " + coursePrice[i] + "원");
         }
 
-        System.out.println(YELLOW + "**********음료**********" + RESET);
+        System.out.println(YELLOW + BOLD + "********** 음료 **********" + RESET);
         String[] drinkMenu = menuCustomerPrice.getDrinkMenuList();
         int[] drinkPrice = menuCustomerPrice.getDrinkPriceInt();
         for (int j = 0; j < drinkMenu.length; j++) {
@@ -71,7 +72,7 @@ public class Server {
         }
     }
 
-    void standby() { // 서버호출&대기 메소드
+    void standby() { // 서버 호출&대기 메소드
         while (true) {
             printBanner("필요한 것이 있으면 \"저기요\"라고 불러주세요.", CYAN);
             String answer = scanner.nextLine();
@@ -180,23 +181,27 @@ public class Server {
         }
     }
 
-    void FeedbackPayied(double price) { // 결제 메소드 (세인) 여기 매개 변수 넣어주세요; 테이블마다의 가격
-        printBanner("결제에 앞서 피드백을 받고 있습니다. 익명성이 보장되며 자유롭게 참여하실 수 있습니다.", CYAN);    // 결제메소드에서 피드백 받음
-        Feedback feedback = Feedback.getInstance(); // Feedback 싱글톤
-        feedback.getFeedback(); // 결제하기 전 피드백 받기
+    void FeedbackPayied(double price) { // 결제 메소드
+        printBanner("결제에 앞서 피드백을 받고 있습니다. 익명성이 보장되며 자유롭게 참여하실 수 있습니다.", CYAN);
+        Feedback feedback = Feedback.getInstance();
+        feedback.getFeedback();
         System.out.println("결제를 원하시는 수단을 입력해주세요(카드 / 현금): ");
         String payMethod = scanner.nextLine();
-        if (payMethod.equals("카드")) {        // 카드로 결제한다고 하면
-            cardPay.pay(price);                // 위에서 넣은 변수가 여기서 매개변수로 쓰임. 위에서 CardPay 싱글톤 객체 선언함.
-        }
-        else if (payMethod.equals("현금")) {   // 현금으로 결제한다고 하면
-            cashPay.pay(price);                // 위에서 넣은 변수가 여기서 매개변수로 쓰임. 위에서 CashPay 싱글톤 객체 선언함.
+        if (payMethod.equals("카드")) {
+            cardPay.pay(price);
+        } else if (payMethod.equals("현금")) {
+            cashPay.pay(price);
         }
     }
 
     private void printBanner(String message, String color) {
-        System.out.println(color + "===========================================");
+        System.out.println(color + BOLD + "===========================================");
         System.out.println(message);
         System.out.println("===========================================" + RESET);
+    }
+    
+    private void printLightBanner(String message, String color) {
+        System.out.println(message);
+        System.out.println(color + BOLD + "-------------------------------------------" + RESET);
     }
 }
