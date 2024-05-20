@@ -1,8 +1,7 @@
 public class CashPay implements Pay {
     private static CashPay instance;
     private CouponCheckerandDiscount checker;
-    private Server server; // 서버 인스턴스를 필드로 추가
-    private Customer customer;
+    private Server server;
 
     private CashPay() {
         checker = new CouponCheckerandDiscount();
@@ -16,7 +15,7 @@ public class CashPay implements Pay {
     }
 
     public void setServer(Server server) {
-        this.server = server; // 서버 인스턴스를 설정하는 메서드
+        this.server = server;
     }
 
     private void calculateChange(double cashBalance, double price) {
@@ -25,7 +24,7 @@ public class CashPay implements Pay {
     }
 
     public void pay(double price) {
-        Customer currentCustomer = server.getCurrentCustomer(); // 서버 인스턴스를 통해 현재 고객을 가져옴
+        Customer currentCustomer = server.getCurrentCustomer();
         double cashBalance = currentCustomer.getCashBalance();
 
         while (price > 0) {
@@ -33,7 +32,7 @@ public class CashPay implements Pay {
 
             if (cashBalance >= price) {
                 System.out.println("결제하실 금액은 " + price + "원 입니다.");
-                boolean hasCoupon = customer.isHaveCoupon();
+                boolean hasCoupon = currentCustomer.isHaveCoupon();
                 if (hasCoupon) {
                     price = checker.applyDiscount(price, hasCoupon);
                 }

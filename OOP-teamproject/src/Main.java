@@ -1,11 +1,9 @@
 public class Main {
-    // Essential Physical Resource in the Main!
     public static Table table1 = new Table();
-    
     public static PreOpen pre = new PreOpen();
     public static DuringOpen duringOpen = new DuringOpen();
     public static AfterOpen afterOpen = new AfterOpen();
-    
+
     public static void main(String[] args) {
         System.out.println("레스토랑 프로젝트");
         System.out.println("------------");
@@ -15,7 +13,6 @@ public class Main {
 
         pre.chooseJob();
 
-        // 매장 오픈 여부 확인 후 DuringOpen 클래스로 영업 시작
         if (pre.openStore) {
             duringOpen.openRestaurant();
         }

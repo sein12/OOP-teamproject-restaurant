@@ -196,8 +196,8 @@ public class Server {
     }
 
     void FeedbackPayied(double price) { // 결제 메소드
-        printBanner("결제에 앞서 피드백을 받고 있습니다. 익명성이 보장되며 자유롭게 참여하실 수 있습니다.", CYAN);
         Feedback feedback = Feedback.getInstance();
+        printBanner("결제에 앞서 피드백을 받고 있습니다. 익명성이 보장되며 자유롭게 참여하실 수 있습니다.", CYAN);
         feedback.getFeedback();
         System.out.println("결제를 원하시는 수단을 입력해주세요(카드 / 현금): ");
         String payMethod = scanner.nextLine();
@@ -206,6 +206,8 @@ public class Server {
         } else if (payMethod.equals("현금")) {
             cashPay.pay(price);
         }
+        // 결제 후 종료
+        return;
     }
 
     private void printBanner(String message, String color) {

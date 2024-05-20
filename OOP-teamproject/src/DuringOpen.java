@@ -16,22 +16,25 @@ public class DuringOpen {
     private static final String BOLD = "\u001B[1m";
 
     public DuringOpen() {
-        // CardPay 및 CashPay 인스턴스에 서버 인스턴스를 설정
         CardPay.getInstance().setServer(server);
         CashPay.getInstance().setServer(server);
     }
 
     public void openRestaurant() {
-        for (int hour = 12; hour <= 18; hour++) {
+        /*
+    	for (int hour = 12; hour <= 18; hour++) {
             printBanner("현재 시간: " + hour + ":00", GREEN);
             handleCustomer(hour);
         }
+        */
+    	printBanner("현재 시간: " + 12 + ":00", GREEN);
+        handleCustomer(12);
     }
 
     private void handleCustomer(int hour) {
         printBanner("손님 입장", GREEN);
         
-        Customer customer = new Customer(); // 손님 객체 생성
+        Customer customer = new Customer();
         System.out.println("카드 잔액을 입력해주세요: ");
         customer.setCardBalance(scanner.nextDouble());
         System.out.println("현금 잔액을 입력해주세요: ");
@@ -40,7 +43,7 @@ public class DuringOpen {
         customer.setHaveCoupon(scanner.nextBoolean());
         scanner.nextLine(); // 개행 문자 처리
 
-        server.setCurrentCustomer(customer); // 서버에 현재 손님 설정
+        server.setCurrentCustomer(customer);
 
         server.welcome();
         server.reservationsEntry(hour);
@@ -59,9 +62,6 @@ public class DuringOpen {
         printBanner("Server 대기 중", CYAN);
         server.standby();
 
-        double totalPrice = table1.getTotalPrice();
-        server.FeedbackPayied(totalPrice);
-        
         table1.reset(); // 결제 후 테이블 초기화
 
         printBanner("현재 시간 " + hour + ":00의 손님 처리가 완료되었습니다. 다음 손님을 맞이합니다.", GREEN);
