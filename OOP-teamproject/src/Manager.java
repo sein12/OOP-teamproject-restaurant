@@ -4,9 +4,9 @@ public class Manager extends Server{        // Manager class는 Server class를 
 	static Feedback feedback = Feedback.getInstance();   // manageFeedback() 사용; feedbackGetAndCheck에서 Feedback으로 변경
 	
 	public void feedbackMent(String category, float point, String who) { // food와 service에 관해서는 같은 메소드 사용
-        if (Feedback.foodRateMean >= 3.7) {
+        if (point >= 3.7) {
             System.out.println(category + "에 관한 평가 점수가 " + point + "점으로 매우 좋습니다. 모두 " + who + "님들께 박수 부탁드립니다.");
-        } else if (Feedback.foodRateMean >= 2.5) {
+        } else if (point >= 2.5) {
             System.out.println(category + "에 관한 평가 점수가 " + point + "점으로 나쁘지는 않습니다만, " + who + "님들 조금 더 분발하셔야 할 것 같습니다.");
         } else {
             System.out.println(category + "에 관한 평가 점수가 " + point + "점으로 나쁘네요. " + who + "님들과는 차후에 면담을 갖도록 하겠습니다.");
@@ -14,9 +14,9 @@ public class Manager extends Server{        // Manager class는 Server class를 
     }
 	
 	public void feedbackMent(String category, float point) { // facility에 관해서는 다른 메소드 사용 (overload)
-        if (Feedback.foodRateMean >= 3.5) {
+        if (point >= 3.5) {
             System.out.println(category + "에 관한 평가 점수가 " + point + "점으로 매우 좋습니다. 모두 서로에게 박수 부탁드립니다.");
-        } else if (Feedback.foodRateMean >= 1.7) {
+        } else if (point >= 1.7) {
             System.out.println(category + "에 관한 평가 점수가 " + point + "점으로 나쁘지는 않습니다만, 서버님들과 쉐프님들께서는 시설의 청결도에 조금 더 신경 써주시고 저는 새로운 인테리어를 준비하도록 하겠습니다.");
         } else {
             System.out.println(category + "에 관한 평가 점수가 " + point + "점으로 나쁘네요. 위생과 관련하여 서버님들과 쉐프님들에게 재교육이 있을 예정이고 업체를 불러 대청소를 진행할 것이며, 조만간 인테리어 공사와 시설보수가 있을 예정입니다.");

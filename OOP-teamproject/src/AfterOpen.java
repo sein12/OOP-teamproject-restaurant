@@ -75,6 +75,7 @@ public class AfterOpen {
             switch (choice) {
                 case 1:
                     reviewFeedback();
+                    manager.manageFeedback();
                     break;
                 case 2:
                     RevenueAndCost.printFinanceReport();
