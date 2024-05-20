@@ -39,9 +39,9 @@ public class AfterOpen {
     private void chefOperations() {
         while (true) {
             printBanner("셰프로 선택하셨습니다. 할 일을 선택해주세요:", CYAN);
-            System.out.println(CYAN + "1. 재고 확인" + RESET);
-            System.out.println(CYAN + "2. 직업 선택으로 돌아가기" + RESET);
-            System.out.println(CYAN + "===========================================" + RESET);
+            System.out.println("1. 재고 확인" + RESET);
+            System.out.println("2. 직업 선택으로 돌아가기" + RESET);
+            System.out.println(CYAN + "========================================================================================" + RESET);
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // 개행 문자 처리
@@ -63,11 +63,11 @@ public class AfterOpen {
     private void managerOperations() {
         while (true) {
             printBanner("매니저로 선택하셨습니다. 할 일을 선택해주세요:", CYAN);
-            System.out.println(CYAN + "1. 피드백 검토" + RESET);
-            System.out.println(CYAN + "2. 재무 관리" + RESET);
-            System.out.println(CYAN + "3. 직업 선택으로 돌아가기" + RESET);
-            System.out.println(CYAN + "9. 프로그램 종료" + RESET);
-            System.out.println(CYAN + "===========================================" + RESET);
+            System.out.println("1. 피드백 검토" + RESET);
+            System.out.println("2. 재무 관리" + RESET);
+            System.out.println("3. 직업 선택으로 돌아가기" + RESET);
+            System.out.println(RED + "9. 프로그램 종료" + RESET);
+            System.out.println(CYAN + "========================================================================================" + RESET);
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // 개행 문자 처리
@@ -95,15 +95,15 @@ public class AfterOpen {
         Feedback feedback = Feedback.getInstance();
         feedback.setFeedback(); // 피드백 평균값 계산
         printBanner("피드백 검토:", CYAN);
-        System.out.println(CYAN + "음식 평점: " + Feedback.foodRateMean + RESET);
-        System.out.println(CYAN + "서비스 평점: " + Feedback.serviceRateMean + RESET);
-        System.out.println(CYAN + "시설 평점: " + Feedback.facilityRateMean + RESET);
-        System.out.println(CYAN + "===========================================" + RESET);
+        System.out.println("음식 평점: " + Feedback.foodRateMean + RESET);
+        System.out.println("서비스 평점: " + Feedback.serviceRateMean + RESET);
+        System.out.println("시설 평점: " + Feedback.facilityRateMean + RESET);
+        System.out.println("========================================================================================" + RESET);
     }
 
     private void printBanner(String message, String color) {
-        System.out.println(color + BOLD + "===========================================");
+        System.out.println(color + BOLD + "========================================================================================");
         System.out.println(message);
-        System.out.println("===========================================" + RESET);
+        System.out.println("========================================================================================" + RESET);
     }
 }

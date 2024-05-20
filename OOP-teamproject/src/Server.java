@@ -99,7 +99,8 @@ public class Server {
                         break;
                     case "결제":
                         double totalPrice = Main.table1.getTotalPrice();
-                        FeedbackPayied(totalPrice);
+                        beforePay();
+                        paying(totalPrice);
                         return; // 결제가 완료되면 메서드 종료
                     case "주문 내역":
                         Main.table1.printOrder();
@@ -195,10 +196,14 @@ public class Server {
         }
     }
 
-    void FeedbackPayied(double price) { // 결제 메소드
+    void beforePay() { // 결제 메소드
         Feedback feedback = Feedback.getInstance();
         printBanner("결제에 앞서 피드백을 받고 있습니다. 익명성이 보장되며 자유롭게 참여하실 수 있습니다.", CYAN);
         feedback.getFeedback();
+        return;
+    }
+    
+    void paying(double price) { // 결제 메소드
         System.out.println("결제를 원하시는 수단을 입력해주세요(카드 / 현금): ");
         String payMethod = scanner.nextLine();
         if (payMethod.equals("카드")) {

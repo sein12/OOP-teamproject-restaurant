@@ -1,6 +1,16 @@
 import java.util.Scanner;
 
 public class Feedback {        //  getFeedbackAndGetPayied에서 FeedbackPay
+	
+    private static final String RESET = "\u001B[0m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+    private static final String BLUE = "\u001B[34m";
+    private static final String PURPLE = "\u001B[35m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String BOLD = "\u001B[1m";
+    
     static int rateNum = 0;            // 평가 횟수; 평가한 사람의 수
     
     static float foodRateSum = 0;        // 음식 점수 총합
@@ -31,15 +41,14 @@ public class Feedback {        //  getFeedbackAndGetPayied에서 FeedbackPay
         String feedbackOk = scanner.next();
         if (feedbackOk.equals("예")) {
             rateNum++; // 피드백 남긴 사람 수
-            System.out.println("음식, 서비스, 시설 이 세가지 항목에 대해 고객님의 점수를 남겨주세요.");
-            System.out.println("저희 매장의 음식에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ");
+            printBanner("음식, 서비스, 시설 이 세가지 항목에 대해 고객님의 점수를 남겨주세요. \n저희 매장의 음식에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ", YELLOW);
             foodRateSum += scanner.nextFloat();
-            System.out.println("저희 매장의 서비스에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ");
+            printBanner("저희 매장의 서비스에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ", YELLOW);
             serviceRateSum += scanner.nextFloat();
-            System.out.println("저희 매장의 시설에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ");
+            printBanner("저희 매장의 시설에 대해 1점부터 5점 사이에서 점수를 입력해주세요: ", YELLOW);
             facilityRateSum += scanner.nextFloat();
             scanner.nextLine(); // 개행 문자 처리 
-            System.out.println("고객님의 소중한 의견 감사드립니다. 남겨주신 평가는 저희 매장의 발전에 굉장히 큰 도움이 됩니다.");
+            printBanner("고객님의 소중한 의견 감사드립니다. 남겨주신 평가는 저희 매장의 발전에 굉장히 큰 도움이 됩니다.", GREEN);
         }
     }
 
@@ -51,5 +60,11 @@ public class Feedback {        //  getFeedbackAndGetPayied에서 FeedbackPay
         } else {
             System.out.println("피드백 데이터가 없습니다.");
         }
+    }
+    
+    private void printBanner(String message, String color) {
+        System.out.println(color + BOLD + "===========================================");
+        System.out.println(message);
+        System.out.println("===========================================" + RESET);
     }
 }

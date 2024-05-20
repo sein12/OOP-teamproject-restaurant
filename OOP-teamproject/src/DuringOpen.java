@@ -21,14 +21,10 @@ public class DuringOpen {
     }
 
     public void openRestaurant() {
-        /*
     	for (int hour = 12; hour <= 18; hour++) {
             printBanner("현재 시간: " + hour + ":00", GREEN);
             handleCustomer(hour);
         }
-        */
-    	printBanner("현재 시간: " + 12 + ":00", GREEN);
-        handleCustomer(12);
     }
 
     private void handleCustomer(int hour) {
@@ -39,8 +35,9 @@ public class DuringOpen {
         customer.setCardBalance(scanner.nextDouble());
         System.out.println("현금 잔액을 입력해주세요: ");
         customer.setCashBalance(scanner.nextDouble());
-        System.out.println("쿠폰을 가지고 있습니까? (true/false): ");
-        customer.setHaveCoupon(scanner.nextBoolean());
+        System.out.println("쿠폰을 가지고 있습니까? (네 | 아니오): ");
+        String answer = scanner.nextLine();
+        customer.setHaveCoupon(answer);
         scanner.nextLine(); // 개행 문자 처리
 
         server.setCurrentCustomer(customer);

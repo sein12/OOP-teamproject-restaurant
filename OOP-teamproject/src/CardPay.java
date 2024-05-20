@@ -38,6 +38,7 @@ public class CardPay implements Pay {
                 break;
             } else {
                 System.out.println("카드 잔액이 부족하여 결제를 완료할 수 없습니다.");
+                server.paying(price);
                 break;
             }
         }

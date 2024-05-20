@@ -23,7 +23,11 @@ public class Customer {
         return haveCoupon;
     }
 
-    public void setHaveCoupon(boolean haveCoupon) {
-        this.haveCoupon = haveCoupon;
+    public void setHaveCoupon(String haveCoupon) {
+    	if (haveCoupon.equals("네")) {
+    		this.haveCoupon = true;
+    	} else {
+    		this.haveCoupon = false;
+    	}
     }
 }
